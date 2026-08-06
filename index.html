@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en" data-theme="cool">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OneTutor — Course (Instructor)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              display: ["Suisse Intl Trial", "Inter", "system-ui", "sans-serif"],
+              body: ["Inter", "system-ui", "sans-serif"],
+            },
+            maxWidth: {
+              layout: "var(--layout-max-width)",
+              content: "var(--layout-content-max)",
+            },
+            spacing: {
+              section: "var(--layout-section-gap)",
+              "section-lg": "var(--layout-section-gap-lg)",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="design-system.css" />
+  </head>
+  <body data-course-page="instructor">
+    <div class="h-screen flex">
+      <aside id="sidebar" class="w-[232px] shrink-0 border border-[var(--onetutor-card-border)] flex flex-col px-8 pt-14 pb-10 transition-all duration-200 sticky top-0 h-screen">
+        <div class="min-h-0 overflow-y-auto pr-2">
+          <div class="flex items-center justify-between mb-8">
+            <div id="sidebar-logo" class="h-[23.634px] w-[84.687px] overflow-hidden">
+              <img
+                src="assets/images/onetutor-logo.png"
+                alt="OneTutor"
+                class="h-full w-full object-contain"
+              />
+            </div>
+            <button id="sidebar-toggle" aria-label="Toggle sidebar">
+              <i data-lucide="panel-left" class="h-5 w-5 shrink-0 ot-thin-arrow"></i>
+            </button>
+          </div>
+
+          <div class="space-y-3 text-sm">
+            <button class="flex items-center gap-3 text-left">
+              <i data-lucide="plus" class="h-5 w-5 shrink-0 ot-thin-arrow"></i><span data-sidebar-label>Create course</span>
+            </button>
+            <button class="flex items-center gap-3 text-left">
+              <i data-lucide="book-open" class="h-5 w-5 shrink-0 ot-thin-arrow"></i><span data-sidebar-label>All courses</span>
+            </button>
+          </div>
+
+          <div id="sidebar-courses-block" class="mt-6">
+            <p class="text-sm mb-3" data-sidebar-label>Courses</p>
+            <ul class="space-y-3 text-sm">
+              <li class="flex items-start gap-3">
+                <i data-lucide="book-open" class="h-5 w-5 shrink-0 ot-thin-arrow mt-0.5"></i><span data-sidebar-label>Myers–Briggs Type Indicator</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i data-lucide="book-open" class="h-5 w-5 shrink-0 ot-thin-arrow mt-0.5"></i><span data-sidebar-label>Neuroplasticity 101: Building the Brain You Want</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="message-circle" class="h-5 w-5 shrink-0 ot-thin-arrow"></i><span data-sidebar-label>Chat</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="rocket" class="h-5 w-5 shrink-0 ot-thin-arrow"></i><span data-sidebar-label>Quiz</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="box" class="h-5 w-5 shrink-0 ot-thin-arrow"></i><span data-sidebar-label>Materials</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="activity" class="h-5 w-5 shrink-0 ot-thin-arrow"></i><span data-sidebar-label>Analytics</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="flex-1"></div>
+
+        <div class="shrink-0 pt-6">
+          <p class="text-sm mb-3" data-sidebar-label>Tools</p>
+          <ul class="space-y-3 text-sm">
+            <li class="flex items-center gap-3">
+              <i data-lucide="bell" class="h-5 w-5 shrink-0 ot-thin-arrow"></i><span data-sidebar-label>Notifications</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i data-lucide="settings" class="h-5 w-5 shrink-0 ot-thin-arrow"></i><span data-sidebar-label>Settings</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i data-lucide="users" class="h-5 w-5 shrink-0 ot-thin-arrow"></i><span data-sidebar-label>OneTutor Forum</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i data-lucide="file" class="h-5 w-5 shrink-0 ot-thin-arrow"></i><span data-sidebar-label>Documentation</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i data-lucide="lightbulb" class="h-5 w-5 shrink-0 ot-thin-arrow"></i><span data-sidebar-label>Feedback</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i data-lucide="globe" class="h-5 w-5 shrink-0 ot-thin-arrow"></i><span data-sidebar-label>Language</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i data-lucide="log-out" class="h-5 w-5 shrink-0 ot-thin-arrow"></i><span data-sidebar-label>Logout</span>
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+      <main id="course-main" class="ot-main flex-1 min-h-0" data-course-view="instructor">
+        <div class="ot-shell">
+        <div class="ot-breadcrumb ot-body-small mb-[var(--space-12)]">
+          <button type="button" class="ot-breadcrumb-back ot-hover-mode--interactive ot-body-small h-9">
+            <span class="ot-icon-circle ot-icon-circle--breadcrumb inline-flex" aria-hidden="true">
+              <i data-lucide="chevron-left" class="h-4 w-4 ot-thin-arrow"></i>
+            </span>
+            Back
+          </button>
+          <div class="flex items-center">
+            <div class="ot-breadcrumb-item ot-hover-mode--interactive">
+              <span class="ot-body-small">All courses</span>
+              <span class="ot-icon-circle ot-icon-circle--breadcrumb-sep inline-flex shrink-0" aria-hidden="true">
+                <i data-lucide="chevron-right" class="h-4 w-4 ot-thin-arrow"></i>
+              </span>
+            </div> 
+            <div class="ot-breadcrumb-item ot-hover-mode--interactive ot-breadcrumb-current">
+              <span class="ot-body-small">Neuroplasticity 101: Building the Brain You Want</span>
+            </div>
+          </div>
+        </div>
+
+        <header class="ot-page-header-grid">
+          <div>
+            <div class="flex items-center gap-3 w-full flex-wrap">
+              <h1 class="ot-page-title flex-1 min-w-[12rem]">WS26 Neuroplasticity 101: Building the Brain You Want</h1>
+            </div>
+
+            <div class="ot-course-instructor mt-8">
+              <div class="ot-course-instructor-avatar">
+                <img
+                  src="assets/images/instructor-avatar.png"
+                  alt="Christina Nyttlik"
+                  width="40"
+                  height="40"
+                  loading="lazy"
+                />
+              </div>
+              <div class="ot-course-instructor-body">
+                <p class="ot-course-instructor-name">Dr. Christina Nyttlik</p>
+                <p class="ot-course-instructor-desc">
+                  Hey everyone! In WS26 we explore how experience reshapes the brain, including synapses, circuits, and habits, and how you can use that science to build skills and behaviors you want.
+                  Your brain isn’t fixed; it’s learning from what you repeat.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="flex gap-2 items-start justify-end flex-wrap">
+            <button type="button" id="btn-edit-course" class="ot-btn-secondary ot-body-small">
+              Edit
+              <i data-lucide="pencil" class="h-4 w-4"></i>
+            </button>
+            <a href="student.html" class="ot-btn-secondary ot-body-small no-underline">
+              Student view
+              <i data-lucide="graduation-cap" class="h-4 w-4"></i>
+            </a>
+            <button type="button" class="ot-btn-secondary ot-body-small">
+              Share
+              <i data-lucide="share-2" class="h-4 w-4"></i>
+            </button>
+          </div>
+        </header>
+
+        <section id="top-insights-section" class="ot-top-insights-grid ot-section ot-section--first">
+          <article id="chat-card" class="ot-card-surface w-full min-w-0 p-6 flex flex-col gap-2 items-stretch">
+            <div class="w-full py-4">
+              <p class="ot-card-title">How can I help you today?</p>
+            </div>
+            <div id="chat-composer" class="ot-chat-composer ot-solid-surface">
+              <label class="sr-only" for="chat-input">Quick chat message</label>
+              <div class="ot-chat-input-wrap">
+                <textarea
+                  id="chat-input"
+                  class="ot-chat-input ot-body-small"
+                  rows="2"
+                  placeholder=""
+                  autocomplete="off"
+                  spellcheck="false"
+                ></textarea>
+              </div>
+              <div class="flex items-end justify-between w-full shrink-0">
+                <button type="button" class="ot-chat-icon-btn ot-hover-tooltip" aria-label="Information">
+                  <i data-lucide="info" class="h-6 w-6"></i>
+                  <span class="ot-hover-tooltip__bubble" role="tooltip" aria-hidden="true">AI can make mistakes.</span>
+                </button>
+                <div class="flex items-center ot-chat-icon-row">
+                  <button type="button" id="chat-edit" class="ot-chat-icon-btn ot-hover-tooltip" aria-label="Edit">
+                    <i data-lucide="pencil" class="h-6 w-6"></i>
+                    <span class="ot-hover-tooltip__bubble" role="tooltip" aria-hidden="true">Add files and more</span>
+                  </button>
+                  <button type="button" id="chat-send" class="ot-chat-icon-btn ot-hover-tooltip" aria-label="Send">
+                    <i data-lucide="circle-arrow-up" class="h-6 w-6" aria-hidden="true"></i>
+                    <span class="ot-hover-tooltip__bubble" role="tooltip" aria-hidden="true">Send</span>
+                  </button>
+                </div>
+              </div>
+              <div
+                id="chat-prompt-bubbles"
+                class="ot-chat-prompt-bubbles"
+                role="group"
+                aria-label="Example prompts"
+                aria-hidden="true"
+              >
+                <button type="button" class="ot-chat-prompt-bubble ot-body-small text-[var(--slate-500)]" data-prompt="How did my students perform on the quiz “Synapses, LTP, and practice”? Which questions were hardest?">
+                  How did my students perform on “Synapses, LTP, and practice”? Hardest questions?
+                </button>
+                <button type="button" class="ot-chat-prompt-bubble ot-body-small text-[var(--slate-500)]" data-prompt="What are the most common wrong answers and misconceptions on the WS26 midterm mock exam?">
+                  Most common wrong answers on the midterm mock?
+                </button>
+                <button type="button" class="ot-chat-prompt-bubble ot-body-small text-[var(--slate-500)]" data-prompt="Which quiz items have the lowest success rates, and which distractors are picked most often?">
+                  Lowest success-rate items &amp; top distractors?
+                </button>
+                <button type="button" class="ot-chat-prompt-bubble ot-body-small text-[var(--slate-500)]" data-prompt="Compare Week 3 vs Week 4 engagement and quiz scores. What should I prioritize?">
+                  Week 3 vs Week 4 — engagement &amp; quiz scores?
+                </button>
+                <button type="button" class="ot-chat-prompt-bubble ot-body-small text-[var(--slate-500)]" data-prompt="Summarize at-risk students and suggest interventions based on recent quiz trends.">
+                  At-risk students &amp; interventions from quiz trends?
+                </button>
+              </div>
+            </div>
+
+            <div class="w-full flex items-center justify-between ot-body-small text-[var(--slate-500)]">
+              <p>Recent chats</p>
+              <button id="chat-toggle" class="ot-chat-see-all" type="button">See all</button>
+            </div>
+            <div id="chat-state" class="hidden w-full ot-body-small rounded-md border border-[var(--slate-200)] bg-[var(--onetutor-card-highlight)] px-3 py-2"></div>
+
+            <div class="chat-history-grid w-full grid grid-cols-2 gap-2 min-w-0">
+              <button type="button" class="ot-chat-history-pill ot-hover-mode--interactive min-h-[48px] rounded-[50px] border border-[var(--onetutor-card-border)] px-6 py-3 flex items-center justify-between gap-2 text-left">
+                <span class="ot-chat-history-label ot-body-small text-[var(--onetutor-text-main)] min-w-0 truncate">Synaptic plasticity and Hebbian learning...</span>
+                <span class="ot-icon-circle ot-icon-circle--trailing inline-flex"><i data-lucide="arrow-up-right" class="h-6 w-6 ot-thin-arrow"></i></span>
+              </button>
+              <button type="button" class="ot-chat-history-pill ot-hover-mode--interactive min-h-[48px] rounded-[50px] border border-[var(--onetutor-card-border)] px-6 py-3 flex items-center justify-between gap-2 text-left">
+                <span class="ot-chat-history-label ot-body-small text-[var(--onetutor-text-main)] min-w-0 truncate">Habits and rewiring: practice vs. talent...</span>
+                <span class="ot-icon-circle ot-icon-circle--trailing inline-flex"><i data-lucide="arrow-up-right" class="h-6 w-6 ot-thin-arrow"></i></span>
+              </button>
+              <button type="button" class="ot-chat-history-pill ot-hover-mode--interactive min-h-[48px] rounded-[50px] border border-[var(--onetutor-card-border)] px-6 py-3 flex items-center justify-between gap-2 text-left">
+                <span class="ot-chat-history-label ot-body-small text-[var(--onetutor-text-main)] min-w-0 truncate">“Your Brain on Practice” reading notes...</span>
+                <span class="ot-icon-circle ot-icon-circle--trailing inline-flex"><i data-lucide="arrow-up-right" class="h-6 w-6 ot-thin-arrow"></i></span>
+              </button>
+              <button type="button" class="ot-chat-history-pill ot-hover-mode--interactive min-h-[48px] rounded-[50px] border border-[var(--onetutor-card-border)] px-6 py-3 flex items-center justify-between gap-2 text-left">
+                <span class="ot-chat-history-label ot-body-small text-[var(--onetutor-text-main)] min-w-0 truncate">Create a new chat</span>
+                <span class="ot-icon-circle ot-icon-circle--trailing inline-flex"><i data-lucide="plus" class="h-6 w-6 ot-thin-arrow"></i></span>
+              </button>
+            </div>
+          </article>
+
+          <article
+            id="analytics-compact-card"
+            class="ot-analytics-scope ot-card-surface ot-solid-surface instructor-analytics-compact-figma p-6 flex flex-col gap-2 items-center min-w-0"
+          >
+            <button
+              id="analytics-toggle"
+              type="button"
+              class="w-full flex items-center justify-between py-4 text-left"
+              aria-expanded="false"
+              aria-controls="analytics-expanded-host"
+            >
+              <p class="ot-card-title">Course analytics</p>
+              <i id="analytics-chevron" data-lucide="chevron-down" class="ot-icon-circle h-6 w-6 ot-thin-arrow" aria-hidden="true"></i>
+            </button>
+            <div id="analytics-body" class="w-full">
+              <div
+                id="instructor-progress-ring"
+                class="ot-student-progress-ring"
+                role="progressbar"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="0"
+                aria-label="Class engagement (weekly average)"
+              >
+                <svg class="ot-student-progress-ring__svg" viewBox="0 0 120 120" aria-hidden="true">
+                  <defs>
+                    <linearGradient
+                      id="instructor-progress-ring-grad"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="100%"
+                      gradientUnits="objectBoundingBox"
+                    >
+                      <stop offset="0%" class="ot-student-progress-ring__grad-from" />
+                      <stop offset="100%" class="ot-student-progress-ring__grad-to" />
+                    </linearGradient>
+                  </defs>
+                  <circle
+                    id="instructor-progress-ring-fill"
+                    class="ot-student-progress-ring__fill"
+                    cx="60"
+                    cy="60"
+                    r="57.5"
+                    fill="none"
+                    stroke="url(#instructor-progress-ring-grad)"
+                    transform="rotate(-90 60 60)"
+                  />
+                </svg>
+                <div class="ot-student-progress-ring__label">
+                  <div class="ot-student-progress-ring__value-row">
+                    <span id="instructor-progress-value" class="ot-student-progress-ring__num">0</span>
+                    <span class="ot-student-progress-ring__pct">%</span>
+                  </div>
+                  <span class="ot-student-progress-ring__caption">engagement</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section id="analytics-expanded-host" class="ot-analytics-scope ot-section--nested hidden">
+          <article id="analytics-expanded-card" class="analytics-expanded-card">
+            <div class="mb-8 flex items-start justify-between gap-4">
+              <div>
+                <p class="ot-card-title mb-2">Course analytics</p>
+              </div>
+              <button id="analytics-collapse" class="analytics-collapse-btn" aria-label="Collapse course management view">
+                <span class="ot-icon-circle ot-icon-circle--collapse inline-flex">
+                  <i data-lucide="chevron-up" class="h-5 w-5 ot-thin-arrow"></i>
+                </span>
+              </button>
+            </div>
+
+            <div id="analytics-pane-overview" class="analytics-pane">
+              <div class="mb-6">
+
+                <div class="grid grid-cols-2 gap-4">
+                  <div class="analytics-info-card ot-hover-mode--interactive rounded-lg border border-[var(--onetutor-card-border)] p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                      <div>
+                        <i data-lucide="bar-chart-3" class="analytics-card-icon h-6 w-6"></i>
+                      </div>
+                      <div>
+                        <a class="ot-analytics-feature-link" href="#" aria-label="Analytics">
+                          <h4>Live analytics</h4>
+                          <span class="ot-icon-circle ot-icon-circle--trailing inline-flex" aria-hidden="true">
+                            <i data-lucide="arrow-up-right" class="h-5 w-5 ot-thin-arrow"></i>
+                          </span>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="ot-body-small text-[var(--slate-500)]">
+                      <p>Deep dive into student performance and engagement in real-time</p>
+                    </div>
+                  </div>
+
+                  <div class="improve-ai-card ot-hover-mode--interactive rounded-lg border border-[var(--onetutor-card-border)] p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                      <div>
+                        <i data-lucide="lightbulb" class="analytics-card-icon h-6 w-6"></i>
+                      </div>
+                      <div>
+                        <button type="button" class="ot-analytics-feature-link" aria-label="Improve AI">
+                          <h4 class="improve-ai-heading">Improve AI</h4>
+                          <span class="ot-icon-circle ot-icon-circle--trailing inline-flex" aria-hidden="true">
+                            <i data-lucide="arrow-up-right" class="h-5 w-5 ot-thin-arrow"></i>
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="ot-body-small text-[var(--slate-500)]">
+                      <p>Review AI responses and student answers to improve quality</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div id="analytics-graph-panel" class="mt-4 rounded-lg border border-[var(--onetutor-card-border)] p-5">
+                  <div class="mb-4">
+                    <h4>Student performance trends</h4>
+                    <p class="ot-body-small mt-1 text-[var(--slate-500)]">Track quiz scores, engagement, and completion rates over time</p>
+                  </div>
+                  <div class="h-[300px] analytics-chart-canvas-wrap p-2 box-border">
+                    <canvas id="analytics-trend-chart-overview"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="ot-section ot-section--span-insights-width">
+          <div class="ot-section-frame flex justify-between items-center mb-[var(--space-6)]">
+            <div class="ot-section-title-row ot-hover-mode--interactive">
+              <a class="ot-section-title" href="manage-quizzes.html">Manage quizzes</a>
+              <span class="ot-icon-circle ot-icon-circle--nav" aria-hidden="true">
+                <i data-lucide="arrow-up-right" class="h-6 w-6 ot-thin-arrow"></i>
+              </span>
+            </div>
+            <button type="button" class="ot-btn-primary ot-body-small">
+              Create a new quiz
+              <i data-lucide="plus" class="h-6 w-6"></i>
+            </button>
+          </div>
+          <div class="ot-rail ot-rail-fade">
+            <div id="quiz-scroller" class="overflow-x-auto scrollbar-none">
+              <div id="quiz-track" class="flex gap-6 py-1"></div>
+            </div>
+            <button id="quiz-next" class="ot-rail-arrow" aria-label="Next quizzes">
+              <i data-lucide="chevron-right" class="ot-arrow-icon ot-thin-arrow" aria-hidden="true"></i>
+            </button>
+          </div>
+        </section>
+
+        <section class="ot-section ot-section--span-insights-width">
+          <div class="ot-section-frame ot-section-title-row ot-hover-mode--interactive mb-[var(--space-6)]">
+            <a class="ot-section-title" href="materials-library.html">Upload course materials</a>
+            <span class="ot-icon-circle ot-icon-circle--nav" aria-hidden="true">
+              <i data-lucide="arrow-up-right" class="h-6 w-6 ot-thin-arrow"></i>
+            </span>
+          </div>
+          <div class="ot-upload-row">
+            <div class="flex items-center gap-6">
+              <button id="upload-toggle" class="ot-toggle" data-state="off" aria-label="Toggle consent" aria-pressed="false"></button>
+              <p class="ot-body-small text-[var(--slate-500)]">
+                I confirm that I have the right to upload these files and that they do not violate any intellectual property rights.
+              </p>
+            </div>
+            <a href="materials-library.html" class="ot-btn-primary ot-body-small no-underline inline-flex items-center gap-3">
+              Upload materials
+              <i data-lucide="plus" class="h-6 w-6"></i>
+            </a>
+          </div>
+          <div class="ot-rail ot-rail-fade mt-[var(--space-6)]" data-rail-materials>
+            <div id="material-scroller" class="overflow-x-auto scrollbar-none">
+              <div id="material-track" class="flex gap-6 py-1"></div>
+            </div>
+            <button id="material-next" class="ot-rail-arrow" aria-label="Next materials">
+              <i data-lucide="chevron-right" class="ot-arrow-icon ot-thin-arrow" aria-hidden="true"></i>
+            </button>
+          </div>
+        </section>
+        </div>
+      </main>
+    </div>
+
+    <script src="course-page.js"></script>
+  </body>
+</html>

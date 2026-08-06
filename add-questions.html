@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="en" data-theme="cool">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add questions — OneTutor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              display: ["Suisse Intl Trial", "Inter", "system-ui", "sans-serif"],
+              body: ["Inter", "system-ui", "sans-serif"],
+            },
+            maxWidth: {
+              layout: "var(--layout-max-width)",
+              content: "var(--layout-content-max)",
+            },
+            spacing: {
+              section: "var(--layout-section-gap)",
+              "section-lg": "var(--layout-section-gap-lg)",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="design-system.css" />
+  </head>
+  <body data-course-page="instructor" data-page="add-questions">
+    <div class="h-screen flex">
+      <aside id="sidebar" class="w-[232px] shrink-0 border border-[var(--onetutor-card-border)] flex flex-col px-8 pt-14 pb-10 transition-all duration-200 sticky top-0 h-screen">
+        <div class="min-h-0 overflow-y-auto pr-2">
+          <div class="flex items-center justify-between mb-8">
+            <div id="sidebar-logo" class="h-[23.634px] w-[84.687px] overflow-hidden">
+              <img
+                src="assets/images/onetutor-logo.png"
+                alt="OneTutor"
+                class="h-full w-full object-contain"
+              />
+            </div>
+            <button id="sidebar-toggle" type="button" aria-label="Toggle sidebar">
+              <i data-lucide="panel-left" class="h-5 w-5 shrink-0 ot-thin-arrow"></i>
+            </button>
+          </div>
+
+          <div class="space-y-3 text-sm">
+            <button type="button" class="flex items-center gap-3 text-left">
+              <i data-lucide="plus" class="h-5 w-5 shrink-0 ot-thin-arrow"></i><span data-sidebar-label>Create course</span>
+            </button>
+            <button type="button" class="flex items-center gap-3 text-left">
+              <i data-lucide="book-open" class="h-5 w-5 shrink-0 ot-thin-arrow"></i><span data-sidebar-label>All courses</span>
+            </button>
+          </div>
+
+          <div id="sidebar-courses-block" class="mt-6">
+            <p class="text-sm mb-3" data-sidebar-label>Courses</p>
+            <ul class="space-y-3 text-sm">
+              <li class="flex items-start gap-3">
+                <i data-lucide="book-open" class="h-5 w-5 shrink-0 ot-thin-arrow mt-0.5"></i><span data-sidebar-label>Myers–Briggs Type Indicator</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i data-lucide="book-open" class="h-5 w-5 shrink-0 ot-thin-arrow mt-0.5"></i><span data-sidebar-label>Neuroplasticity 101: Building the Brain You Want</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="message-circle" class="h-5 w-5 shrink-0 ot-thin-arrow"></i><span data-sidebar-label>Chat</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="rocket" class="h-5 w-5 shrink-0 ot-thin-arrow"></i><span data-sidebar-label>Quiz</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="box" class="h-5 w-5 shrink-0 ot-thin-arrow"></i><span data-sidebar-label>Materials</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <i data-lucide="activity" class="h-5 w-5 shrink-0 ot-thin-arrow"></i><span data-sidebar-label>Analytics</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="flex-1"></div>
+
+        <div class="shrink-0 pt-6">
+          <p class="text-sm mb-3" data-sidebar-label>Tools</p>
+          <ul class="space-y-3 text-sm">
+            <li class="flex items-center gap-3">
+              <i data-lucide="bell" class="h-5 w-5 shrink-0 ot-thin-arrow"></i><span data-sidebar-label>Notifications</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i data-lucide="settings" class="h-5 w-5 shrink-0 ot-thin-arrow"></i><span data-sidebar-label>Settings</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i data-lucide="users" class="h-5 w-5 shrink-0 ot-thin-arrow"></i><span data-sidebar-label>OneTutor Forum</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i data-lucide="file" class="h-5 w-5 shrink-0 ot-thin-arrow"></i><span data-sidebar-label>Documentation</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i data-lucide="lightbulb" class="h-5 w-5 shrink-0 ot-thin-arrow"></i><span data-sidebar-label>Feedback</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i data-lucide="globe" class="h-5 w-5 shrink-0 ot-thin-arrow"></i><span data-sidebar-label>Language</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <i data-lucide="log-out" class="h-5 w-5 shrink-0 ot-thin-arrow"></i><span data-sidebar-label>Logout</span>
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+      <main id="course-main" class="ot-main flex-1 min-h-0" data-course-view="instructor">
+        <div class="ot-shell">
+          <nav class="ot-breadcrumb ot-body-small mb-[var(--space-12)]" aria-label="Breadcrumb">
+            <a href="index.html" class="ot-breadcrumb-back ot-hover-mode--interactive ot-body-small h-9 no-underline">
+              <span class="ot-icon-circle ot-icon-circle--breadcrumb inline-flex" aria-hidden="true">
+                <i data-lucide="chevron-left" class="h-4 w-4 ot-thin-arrow"></i>
+              </span>
+              Back
+            </a>
+            <div class="flex items-center flex-wrap gap-y-1">
+              <div class="ot-breadcrumb-item ot-hover-mode--interactive">
+                <a href="#" class="ot-body-small text-[inherit] no-underline">All courses</a>
+                <span class="ot-icon-circle ot-icon-circle--breadcrumb-sep inline-flex shrink-0" aria-hidden="true">
+                  <i data-lucide="chevron-right" class="h-4 w-4 ot-thin-arrow"></i>
+                </span>
+              </div>
+              <div class="ot-breadcrumb-item ot-hover-mode--interactive">
+                <a href="index.html" class="ot-body-small text-[inherit] no-underline">Neuroplasticity 101: Building the Brain You Want</a>
+                <span class="ot-icon-circle ot-icon-circle--breadcrumb-sep inline-flex shrink-0" aria-hidden="true">
+                  <i data-lucide="chevron-right" class="h-4 w-4 ot-thin-arrow"></i>
+                </span>
+              </div>
+              <div class="ot-breadcrumb-item ot-hover-mode--interactive">
+                <a href="manage-quizzes.html" class="ot-body-small text-[inherit] no-underline">Manage quizzes</a>
+                <span class="ot-icon-circle ot-icon-circle--breadcrumb-sep inline-flex shrink-0" aria-hidden="true">
+                  <i data-lucide="chevron-right" class="h-4 w-4 ot-thin-arrow"></i>
+                </span>
+              </div>
+              <div class="ot-breadcrumb-item ot-hover-mode--interactive">
+                <span class="ot-body-small">Synaptic plasticity and learning</span>
+                <span class="ot-icon-circle ot-icon-circle--breadcrumb-sep inline-flex shrink-0" aria-hidden="true">
+                  <i data-lucide="chevron-right" class="h-4 w-4 ot-thin-arrow"></i>
+                </span>
+              </div>
+              <div class="ot-breadcrumb-item ot-breadcrumb-current ot-add-questions__crumb-current">
+                <span class="ot-body-small">Add questions</span>
+              </div>
+            </div>
+          </nav>
+
+          <div class="ot-add-questions__center-column">
+          <section class="ot-add-questions__wizard" id="aq-wizard" aria-label="Question generation steps">
+            <div class="ot-add-questions__wizard-frame">
+              <button
+                type="button"
+                id="aq-wizard-prev"
+                class="ot-add-questions__wizard-rail-btn ot-hover-mode--interactive"
+                aria-label="Back"
+                disabled
+              >
+                <i data-lucide="chevron-left" class="ot-arrow-icon ot-thin-arrow" aria-hidden="true"></i>
+                <span class="ot-add-questions__wizard-rail-label">Back</span>
+              </button>
+              <div class="ot-add-questions__wizard-viewport">
+              <div class="ot-add-questions__wizard-track" id="aq-wizard-track">
+            <article
+              class="ot-add-questions__wizard-panel ot-add-questions__half ot-add-questions__half--params"
+              data-figma-node="2554:3804"
+              data-wizard-step="0"
+              id="aq-wizard-panel-0"
+            >
+              <header class="ot-add-questions__params-head">
+                <h2 class="ot-h3 ot-add-questions__params-title">Generation Parameters</h2>
+              </header>
+
+              <div class="ot-add-questions__params-body">
+              <div class="ot-add-questions__stack ot-add-questions__stack--field">
+                <label class="ot-add-questions__label" for="aq-topics">What topics should the questions be about?</label>
+                <span id="aq-topics-hint" class="sr-only">
+                  A short phrase or unit title is enough—you can refine wording after generation.
+                </span>
+                <input
+                  id="aq-topics"
+                  type="text"
+                  class="ot-add-questions__text-input ot-body-tiny"
+                  placeholder="What is cortisol, and how should it work?"
+                  autocomplete="off"
+                  aria-describedby="aq-topics-hint"
+                />
+              </div>
+
+              <div class="ot-add-questions__row-2">
+                <div class="ot-add-questions__stack">
+                  <p class="ot-add-questions__label">Number of questions</p>
+                  <div class="ot-add-questions__num-pair">
+                    <input type="number" class="ot-add-questions__num-input ot-body-small" value="3" min="0" aria-label="Multiple choice count" />
+                    <span class="ot-add-questions__num-label ot-body-small">Multiple Choice</span>
+                  </div>
+                  <div class="ot-add-questions__num-pair">
+                    <input type="number" class="ot-add-questions__num-input ot-body-small" value="3" min="0" aria-label="Free text count" />
+                    <span class="ot-add-questions__num-label ot-body-small">Freetext</span>
+                  </div>
+                </div>
+                <fieldset class="ot-add-questions__stack ot-add-questions__fieldset">
+                  <legend class="ot-add-questions__label ot-add-questions__legend-inline">
+                    Question difficulty
+                    <button type="button" class="ot-add-questions__info-btn ot-hover-tooltip" aria-label="About difficulty">
+                      <i data-lucide="info" class="h-4 w-4 ot-thin-arrow"></i>
+                      <span class="ot-hover-tooltip__bubble" role="tooltip" aria-hidden="true">Default matches your course; Medium and Hard increase cognitive load.</span>
+                    </button>
+                  </legend>
+                  <label class="ot-add-questions__radio ot-hover-mode--interactive"><input type="radio" name="aq-difficulty" value="default" /> Default</label>
+                  <label class="ot-add-questions__radio ot-hover-mode--interactive"><input type="radio" name="aq-difficulty" value="medium" checked /> Medium</label>
+                  <label class="ot-add-questions__radio ot-hover-mode--interactive"><input type="radio" name="aq-difficulty" value="hard" /> Hard</label>
+                </fieldset>
+              </div>
+
+              <div class="ot-add-questions__stack ot-add-questions__stack--field">
+                <label class="ot-add-questions__label ot-add-questions__legend-inline" for="aq-describe">
+                  Describe the type of questions (optional)
+                  <button type="button" class="ot-add-questions__info-btn ot-hover-tooltip" aria-label="About description">
+                    <i data-lucide="info" class="h-4 w-4 ot-thin-arrow"></i>
+                    <span class="ot-hover-tooltip__bubble" role="tooltip" aria-hidden="true">Optional hints shape tone, depth, and format of generated items.</span>
+                  </button>
+                </label>
+                <div
+                  id="aq-describe-composer"
+                  class="ot-chat-composer ot-solid-surface ot-add-questions__describe-composer"
+                >
+                  <label class="sr-only" for="aq-describe">Describe the type of questions</label>
+                  <div class="ot-chat-input-wrap">
+                    <textarea
+                      id="aq-describe"
+                      class="ot-chat-input ot-body-small"
+                      rows="3"
+                      placeholder="Create simple questions that a 5-year-old could understand and answer."
+                      autocomplete="off"
+                      spellcheck="true"
+                    ></textarea>
+                  </div>
+                  <div
+                    id="aq-describe-prompt-bubbles"
+                    class="ot-chat-prompt-bubbles ot-add-questions__prompt-pills"
+                    role="group"
+                    aria-label="Example prompts"
+                    aria-hidden="true"
+                  >
+                    <button type="button" class="ot-chat-prompt-bubble ot-add-questions__prompt-pill ot-body-tiny" data-prompt="Emphasize recall questions that test definitions, key terms, and straightforward facts.">
+                      <i data-lucide="plus" class="ot-add-questions__prompt-pill-icon" aria-hidden="true"></i>
+                      Recall
+                    </button>
+                    <button type="button" class="ot-chat-prompt-bubble ot-add-questions__prompt-pill ot-body-tiny" data-prompt="Include application questions where students apply concepts to new situations or scenarios.">
+                      <i data-lucide="plus" class="ot-add-questions__prompt-pill-icon" aria-hidden="true"></i>
+                      Application
+                    </button>
+                    <button type="button" class="ot-chat-prompt-bubble ot-add-questions__prompt-pill ot-body-tiny" data-prompt="Use concrete examples and illustrative cases in the questions.">
+                      <i data-lucide="plus" class="ot-add-questions__prompt-pill-icon" aria-hidden="true"></i>
+                      Example
+                    </button>
+                    <button type="button" class="ot-chat-prompt-bubble ot-add-questions__prompt-pill ot-body-tiny" data-prompt="Focus on conceptual understanding, not just memorization.">
+                      <i data-lucide="plus" class="ot-add-questions__prompt-pill-icon" aria-hidden="true"></i>
+                      Concept Understanding
+                    </button>
+                    <button type="button" class="ot-chat-prompt-bubble ot-add-questions__prompt-pill ot-body-tiny" data-prompt="Create simple questions that a 5-year-old could understand and answer.">
+                      <i data-lucide="plus" class="ot-add-questions__prompt-pill-icon" aria-hidden="true"></i>
+                      To a 5-year old
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ot-add-questions__stack ot-add-questions__stack--ai" id="aq-ai-slider-wrap">
+                <p id="aq-ai-settings-label" class="ot-add-questions__label ot-add-questions__legend-inline">
+                  AI settings
+                  <button type="button" class="ot-add-questions__info-btn ot-hover-tooltip" aria-label="About AI settings">
+                    <i data-lucide="info" class="h-4 w-4 ot-thin-arrow"></i>
+                    <span class="ot-hover-tooltip__bubble" role="tooltip" aria-hidden="true">Balances generation speed vs. depth of reasoning for new questions.</span>
+                  </button>
+                </p>
+                <div class="ot-add-questions__slider-labels">
+                  <span>Speed</span>
+                  <span>Balanced</span>
+                  <span>Quality</span>
+                </div>
+                <input
+                  id="aq-ai-range"
+                  type="range"
+                  min="0"
+                  max="2"
+                  value="1"
+                  step="1"
+                  class="ot-add-questions__range ot-add-questions__range--figma"
+                  aria-valuetext="Balanced"
+                  aria-labelledby="aq-ai-settings-label"
+                />
+                <p id="aq-ai-current" class="ot-add-questions__slider-current ot-body-small text-center">Currently: Balanced</p>
+              </div>
+              </div>
+            </article>
+
+            <article
+              class="ot-add-questions__wizard-panel ot-add-questions__half ot-add-questions__half--materials"
+              data-figma-node="2585:4185"
+              data-wizard-step="1"
+              id="aq-wizard-panel-1"
+            >
+              <header class="ot-add-questions__params-head">
+                <h2 class="ot-h3 ot-add-questions__params-title">Select Materials (optional)</h2>
+              </header>
+
+              <div class="ot-add-questions__materials-body">
+                <div class="ot-add-questions__materials-search">
+                  <p class="ot-add-questions__materials-intro ot-body-tiny">
+                    Optionally, choose materials for generation. If none are selected, all will be used.
+                  </p>
+                  <div class="ot-add-questions__search ot-add-questions__search--materials">
+                    <div class="ot-add-questions__search-start">
+                      <i data-lucide="search" class="ot-add-questions__search-icon" aria-hidden="true"></i>
+                      <input
+                        type="search"
+                        class="ot-add-questions__search-input ot-body-tiny"
+                        placeholder="Search materials"
+                        aria-label="Search materials"
+                      />
+                    </div>
+                    <button type="button" class="ot-add-questions__search-filter" aria-label="Filter materials">
+                      <i data-lucide="filter" class="h-6 w-6 ot-thin-arrow"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="ot-add-questions__materials-block">
+                  <div class="ot-add-questions__materials-head">
+                    <span class="ot-add-questions__label">Selected materials (3)</span>
+                    <button type="button" class="ot-add-questions__deselect-all ot-body-tiny">Deselect all</button>
+                  </div>
+                  <div class="ot-add-questions__materials-list">
+                    <label class="ot-add-questions__material-card">
+                      <span class="ot-add-questions__material-left">
+                        <i data-lucide="image" class="ot-add-questions__material-icon ot-add-questions__material-icon--image h-6 w-6 shrink-0" aria-hidden="true"></i>
+                        <span class="ot-body-tiny ot-add-questions__material-title">Course 1_Lecture 3</span>
+                      </span>
+                      <input type="checkbox" checked class="ot-add-questions__checkbox" />
+                    </label>
+                    <label class="ot-add-questions__material-card">
+                      <span class="ot-add-questions__material-left">
+                        <i data-lucide="file-video" class="ot-add-questions__material-icon ot-add-questions__material-icon--video h-6 w-6 shrink-0" aria-hidden="true"></i>
+                        <span class="ot-body-tiny ot-add-questions__material-title">Interview with B.F. Skinner</span>
+                      </span>
+                      <input type="checkbox" checked class="ot-add-questions__checkbox" />
+                    </label>
+                    <label class="ot-add-questions__material-card">
+                      <span class="ot-add-questions__material-left">
+                        <i data-lucide="file-text" class="ot-add-questions__material-icon ot-add-questions__material-icon--text h-6 w-6 shrink-0" aria-hidden="true"></i>
+                        <span class="ot-body-tiny ot-add-questions__material-title">Psychology Fundamentals</span>
+                      </span>
+                      <input type="checkbox" checked class="ot-add-questions__checkbox" />
+                    </label>
+                  </div>
+                </div>
+
+                <div class="ot-add-questions__materials-block">
+                  <p class="ot-add-questions__label ot-add-questions__materials-suggested-title">Suggested materials</p>
+                  <div class="ot-add-questions__materials-list">
+                    <label class="ot-add-questions__material-card">
+                      <span class="ot-add-questions__material-left">
+                        <i data-lucide="file" class="ot-add-questions__material-icon ot-add-questions__material-icon--doc h-6 w-6 shrink-0" aria-hidden="true"></i>
+                        <span class="ot-body-tiny ot-add-questions__material-title">Stress and Cortisol — Short Essay</span>
+                      </span>
+                      <input type="checkbox" class="ot-add-questions__checkbox" />
+                    </label>
+                    <label class="ot-add-questions__material-card">
+                      <span class="ot-add-questions__material-left">
+                        <i data-lucide="file" class="ot-add-questions__material-icon ot-add-questions__material-icon--doc h-6 w-6 shrink-0" aria-hidden="true"></i>
+                        <span class="ot-body-tiny ot-add-questions__material-title">Current Directions in Stress and Human Immune Function</span>
+                      </span>
+                      <input type="checkbox" class="ot-add-questions__checkbox" />
+                    </label>
+                    <label class="ot-add-questions__material-card">
+                      <span class="ot-add-questions__material-left">
+                        <i data-lucide="file-video" class="ot-add-questions__material-icon ot-add-questions__material-icon--video h-6 w-6 shrink-0" aria-hidden="true"></i>
+                        <span class="ot-body-tiny ot-add-questions__material-title">Cortisol: What It Is, Function, Symptoms &amp; Level</span>
+                      </span>
+                      <input type="checkbox" class="ot-add-questions__checkbox" />
+                    </label>
+                    <label class="ot-add-questions__material-card">
+                      <span class="ot-add-questions__material-left">
+                        <i data-lucide="file-text" class="ot-add-questions__material-icon ot-add-questions__material-icon--text h-6 w-6 shrink-0" aria-hidden="true"></i>
+                        <span class="ot-body-tiny ot-add-questions__material-title">How Chronic Stress and Cortisol Levels Impact Vaccine …</span>
+                      </span>
+                      <input type="checkbox" class="ot-add-questions__checkbox" />
+                    </label>
+                    <label class="ot-add-questions__material-card">
+                      <span class="ot-add-questions__material-left">
+                        <i data-lucide="file-text" class="ot-add-questions__material-icon ot-add-questions__material-icon--text h-6 w-6 shrink-0" aria-hidden="true"></i>
+                        <span class="ot-body-tiny ot-add-questions__material-title">Investigating the Relationship Between Cortisol, a Stress …</span>
+                      </span>
+                      <input type="checkbox" class="ot-add-questions__checkbox" />
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article
+              class="ot-add-questions__wizard-panel ot-add-questions__half ot-add-questions__half--generate ot-add-questions__wizard-panel--generate"
+              data-wizard-step="2"
+              id="aq-wizard-panel-2"
+            >
+              <div class="ot-add-questions__generate-cta">
+                <button type="button" class="ot-add-questions__generate-gradient-btn" id="aq-generate-submit">
+                  <span class="ot-add-questions__generate-gradient-btn__inner">
+                    <span class="ot-add-questions__generate-gradient-btn__label">Generate questions</span>
+                    <i data-lucide="sparkles" class="h-5 w-5 shrink-0" aria-hidden="true"></i>
+                  </span>
+                </button>
+              </div>
+            </article>
+              </div>
+            </div>
+              <button type="button" id="aq-wizard-next" class="ot-add-questions__wizard-rail-btn ot-hover-mode--interactive" aria-label="Next">
+                <span class="ot-add-questions__wizard-rail-label">Next</span>
+                <i data-lucide="chevron-right" class="ot-arrow-icon ot-thin-arrow" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="ot-add-questions__wizard-dots-row" aria-hidden="true">
+              <div class="ot-add-questions__wizard-dots">
+                <span class="ot-add-questions__wizard-dot ot-add-questions__wizard-dot--active" data-wizard-dot="0"></span>
+                <span class="ot-add-questions__wizard-dot" data-wizard-dot="1"></span>
+                <span class="ot-add-questions__wizard-dot" data-wizard-dot="2"></span>
+              </div>
+            </div>
+          </section>
+
+          <section class="ot-add-questions__tip-bar ot-solid-surface" aria-label="Tip">
+            <p class="ot-body-tiny text-[var(--color-text-primary)]">Daily tip: Make sure to double-check the content, as it is AI-generated.</p>
+          </section>
+          </div>
+
+          <section class="ot-add-questions__bottom" id="aq-review-anchor" aria-label="Review and quiz">
+            <article class="ot-add-questions__panel ot-add-questions__panel--review" data-figma-node="2603:4221">
+              <div class="ot-add-questions__panel-head ot-add-questions__panel-head--review">
+                <h2 class="ot-h3 text-[var(--color-text-primary)]">For review</h2>
+                <div class="ot-add-questions__panel-actions">
+                  <button type="button" class="ot-add-questions__btn-tertiary ot-body-small">Delete All</button>
+                  <button type="button" class="ot-btn-secondary ot-body-small">Save Hidden</button>
+                  <button type="button" class="ot-add-questions__review-expand" aria-label="Expand panel">
+                    <i data-lucide="expand" class="h-6 w-6 ot-thin-arrow"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="ot-add-questions__panel-main">
+                <div class="ot-add-questions__panel-scroll ot-add-questions__panel-scroll--review">
+                  <section class="ot-add-questions__review-qa">
+                    <div class="ot-add-questions__review-qa-top">
+                      <div class="ot-add-questions__review-qa-title-row">
+                        <p class="ot-add-questions__review-qa-title">What is cortisol?</p>
+                        <span class="ot-add-questions__review-type-pill ot-body-tiny">Free-text</span>
+                      </div>
+                      <div class="ot-add-questions__review-qa-actions">
+                        <button type="button" class="ot-add-questions__review-icon-btn ot-add-questions__review-icon-btn--approve" aria-label="Approve">
+                          <i data-lucide="check" class="h-4 w-4"></i>
+                        </button>
+                        <button type="button" class="ot-add-questions__review-icon-btn" aria-label="Hide"><i data-lucide="eye-off" class="h-4 w-4"></i></button>
+                        <button type="button" class="ot-add-questions__review-icon-btn" aria-label="Edit"><i data-lucide="pencil" class="h-4 w-4"></i></button>
+                        <button type="button" class="ot-add-questions__review-icon-btn" aria-label="Delete"><i data-lucide="trash-2" class="h-4 w-4"></i></button>
+                      </div>
+                    </div>
+                    <p class="ot-body-tiny ot-add-questions__review-qa-body">
+                      Cortisol is a steroid hormone produced by your adrenal glands—those small, triangular glands perched on top of your kidneys. It plays a starring role in your body’s response to stress, but its influence goes far beyond that.
+                    </p>
+                  </section>
+
+                  <section class="ot-add-questions__review-qa">
+                    <div class="ot-add-questions__review-qa-top">
+                      <div class="ot-add-questions__review-qa-title-row">
+                        <p class="ot-add-questions__review-qa-title">Which of the following is a possible effect of high cortisol levels?</p>
+                        <span class="ot-add-questions__review-type-pill ot-body-tiny">Multiple-choice</span>
+                      </div>
+                      <div class="ot-add-questions__review-qa-actions">
+                        <button type="button" class="ot-add-questions__review-icon-btn ot-add-questions__review-icon-btn--approve" aria-label="Approve">
+                          <i data-lucide="check" class="h-4 w-4"></i>
+                        </button>
+                        <button type="button" class="ot-add-questions__review-icon-btn" aria-label="Hide"><i data-lucide="eye-off" class="h-4 w-4"></i></button>
+                        <button type="button" class="ot-add-questions__review-icon-btn" aria-label="Edit"><i data-lucide="pencil" class="h-4 w-4"></i></button>
+                        <button type="button" class="ot-add-questions__review-icon-btn" aria-label="Delete"><i data-lucide="trash-2" class="h-4 w-4"></i></button>
+                      </div>
+                    </div>
+                    <div class="ot-add-questions__review-mc">
+                      <div class="ot-add-questions__review-mc-row">
+                        <i data-lucide="check-circle-2" class="ot-add-questions__review-mc-icon ot-add-questions__review-mc-icon--correct h-6 w-6 shrink-0" aria-hidden="true"></i>
+                        <span class="ot-body-tiny ot-add-questions__review-mc-label">Weight gain</span>
+                      </div>
+                      <div class="ot-add-questions__review-mc-row">
+                        <i data-lucide="x-circle" class="ot-add-questions__review-mc-icon ot-add-questions__review-mc-icon--wrong h-6 w-6 shrink-0" aria-hidden="true"></i>
+                        <span class="ot-body-tiny ot-add-questions__review-mc-label">Low blood pressure</span>
+                      </div>
+                      <div class="ot-add-questions__review-mc-row">
+                        <i data-lucide="check-circle-2" class="ot-add-questions__review-mc-icon ot-add-questions__review-mc-icon--correct h-6 w-6 shrink-0" aria-hidden="true"></i>
+                        <span class="ot-body-tiny ot-add-questions__review-mc-label">Insomnia</span>
+                      </div>
+                      <div class="ot-add-questions__review-mc-row">
+                        <i data-lucide="x-circle" class="ot-add-questions__review-mc-icon ot-add-questions__review-mc-icon--wrong h-6 w-6 shrink-0" aria-hidden="true"></i>
+                        <span class="ot-body-tiny ot-add-questions__review-mc-label">Improved immune function</span>
+                      </div>
+                    </div>
+                  </section>
+
+                  <section class="ot-add-questions__review-qa">
+                    <div class="ot-add-questions__review-qa-top">
+                      <div class="ot-add-questions__review-qa-title-row">
+                        <p class="ot-add-questions__review-qa-title">What does cortisol do?</p>
+                        <span class="ot-add-questions__review-type-pill ot-body-tiny">Free-text</span>
+                      </div>
+                      <div class="ot-add-questions__review-qa-actions">
+                        <button type="button" class="ot-add-questions__review-icon-btn ot-add-questions__review-icon-btn--approve" aria-label="Approve">
+                          <i data-lucide="check" class="h-4 w-4"></i>
+                        </button>
+                        <button type="button" class="ot-add-questions__review-icon-btn" aria-label="Hide"><i data-lucide="eye-off" class="h-4 w-4"></i></button>
+                        <button type="button" class="ot-add-questions__review-icon-btn" aria-label="Edit"><i data-lucide="pencil" class="h-4 w-4"></i></button>
+                        <button type="button" class="ot-add-questions__review-icon-btn" aria-label="Delete"><i data-lucide="trash-2" class="h-4 w-4"></i></button>
+                      </div>
+                    </div>
+                    <ul class="ot-add-questions__review-bullets ot-body-tiny">
+                      <li>Cortisol surges during stressful situations as part of the “fight-or-flight” response. It helps mobilize energy by increasing blood sugar levels.</li>
+                      <li>It influences how the body uses carbohydrates, fats, and proteins for energy.</li>
+                      <li>Cortisol can suppress inflammation, which is why synthetic versions (like hydrocortisone) are used to treat inflammatory conditions.</li>
+                      <li>It helps regulate blood pressure by controlling salt and water balance.</li>
+                      <li>Cortisol levels naturally fluctuate throughout the day—typically peaking in the morning and dipping at night. It can dampen immune responses, which is helpful short-term but problematic if levels stay high.</li>
+                    </ul>
+                  </section>
+                </div>
+              </div>
+            </article>
+
+            <article class="ot-add-questions__panel ot-add-questions__panel--inquiz" data-figma-node="2603:4568">
+              <div class="ot-add-questions__panel-head ot-add-questions__panel-head--inquiz">
+                <h2 class="ot-h3 text-[var(--color-text-primary)]">In quiz</h2>
+                <div class="ot-add-questions__panel-actions">
+                  <button type="button" class="ot-btn-secondary ot-body-small">
+                    Filter
+                    <i data-lucide="filter" class="h-6 w-6 shrink-0" aria-hidden="true"></i>
+                  </button>
+                  <button type="button" class="ot-btn-secondary ot-body-small">Preview</button>
+                  <button type="button" class="ot-btn-primary ot-body-small ot-add-questions__publish-btn">Publish</button>
+                  <button type="button" class="ot-add-questions__review-expand" aria-label="Expand panel">
+                    <i data-lucide="expand" class="h-6 w-6 ot-thin-arrow"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="ot-add-questions__panel-main">
+                <div class="ot-add-questions__panel-scroll ot-add-questions__panel-scroll--inquiz">
+                  <section class="ot-add-questions__inquiz-qa">
+                    <div class="ot-add-questions__inquiz-qa-top">
+                      <div class="ot-add-questions__inquiz-qa-left">
+                        <p class="ot-add-questions__review-qa-title">Counterparts of cortisol:</p>
+                        <div class="ot-add-questions__inquiz-pills">
+                          <span class="ot-add-questions__inquiz-pill-approved ot-body-tiny">Approved</span>
+                          <span class="ot-add-questions__review-type-pill ot-body-tiny">Free-text</span>
+                        </div>
+                      </div>
+                      <div class="ot-add-questions__inquiz-options">
+                        <button type="button" class="ot-add-questions__drag" aria-label="Drag to reorder">
+                          <i data-lucide="grip-horizontal" class="h-6 w-6 text-[var(--slate-500)]"></i>
+                        </button>
+                        <button type="button" class="ot-add-questions__inquiz-more" aria-label="More actions">
+                          <i data-lucide="more-vertical" class="h-6 w-6 text-[var(--slate-500)]"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <ul class="ot-add-questions__review-bullets ot-body-tiny">
+                      <li>
+                        Oxytocin: Known as the “love hormone,” oxytocin promotes bonding, trust, and relaxation. It can lower cortisol levels during social interactions, physical touch, or emotional connection.
+                      </li>
+                      <li>
+                        Serotonin: This mood-regulating neurotransmitter helps buffer stress and stabilize emotions. Healthy serotonin levels are associated with lower cortisol and improved resilience.
+                      </li>
+                      <li>
+                        Melatonin: Produced at night, melatonin helps regulate sleep. It indirectly counters cortisol by promoting rest and reducing nighttime stress.
+                      </li>
+                      <li>
+                        Insulin: While not a stress hormone, insulin interacts with cortisol in regulating blood sugar. Cortisol raises glucose; insulin lowers it. Their balance is crucial for metabolic health.
+                      </li>
+                      <li>
+                        Endorphins: These feel-good chemicals released during exercise, laughter, or pleasure can reduce stress perception and help bring cortisol down.
+                      </li>
+                    </ul>
+                  </section>
+
+                  <section class="ot-add-questions__inquiz-qa">
+                    <div class="ot-add-questions__inquiz-qa-top">
+                      <div class="ot-add-questions__inquiz-qa-left">
+                        <p class="ot-add-questions__review-qa-title">What is cortisol caused by?</p>
+                        <div class="ot-add-questions__inquiz-pills">
+                          <span class="ot-add-questions__inquiz-pill-approved ot-body-tiny">Approved</span>
+                          <span class="ot-add-questions__review-type-pill ot-body-tiny">Free-text</span>
+                        </div>
+                      </div>
+                      <div class="ot-add-questions__inquiz-options">
+                        <button type="button" class="ot-add-questions__drag" aria-label="Drag to reorder">
+                          <i data-lucide="grip-horizontal" class="h-6 w-6 text-[var(--slate-500)]"></i>
+                        </button>
+                        <button type="button" class="ot-add-questions__inquiz-more" aria-label="More actions">
+                          <i data-lucide="more-vertical" class="h-6 w-6 text-[var(--slate-500)]"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <p class="ot-body-tiny ot-add-questions__inquiz-body">
+                      Cortisol is produced by your adrenal glands, but its release is orchestrated by a sophisticated hormonal relay system called the HPA axis—short for hypothalamic-pituitary-adrenal axis.
+                    </p>
+                  </section>
+
+                  <section class="ot-add-questions__inquiz-qa">
+                    <div class="ot-add-questions__inquiz-qa-top">
+                      <div class="ot-add-questions__inquiz-qa-left">
+                        <p class="ot-add-questions__review-qa-title">Explain the Cushing syndrome.</p>
+                        <div class="ot-add-questions__inquiz-pills">
+                          <span class="ot-add-questions__review-type-pill ot-body-tiny">Free-text</span>
+                        </div>
+                      </div>
+                      <div class="ot-add-questions__inquiz-options">
+                        <button type="button" class="ot-add-questions__drag" aria-label="Drag to reorder">
+                          <i data-lucide="grip-horizontal" class="h-6 w-6 text-[var(--slate-500)]"></i>
+                        </button>
+                        <button type="button" class="ot-add-questions__inquiz-more" aria-label="More actions">
+                          <i data-lucide="more-vertical" class="h-6 w-6 text-[var(--slate-500)]"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <p class="ot-body-tiny ot-add-questions__inquiz-body">
+                      Cushing syndrome is a hormonal disorder caused by prolonged exposure to high levels of cortisol, often from long-term use of corticosteroid medications or, less commonly, from tumors in the adrenal glands or pituitary gland that cause the body to overproduce cortisol. Symptoms include weight gain, a round face (“moon face”), thin skin, easy bruising, and high blood pressure.
+                    </p>
+                  </section>
+                </div>
+              </div>
+            </article>
+          </section>
+        </div>
+
+        <div
+          id="aq-generate-loading-overlay"
+          class="ot-add-questions__loading-overlay hidden"
+          aria-hidden="true"
+        >
+          <div class="ot-add-questions__loading-tip ot-body-small text-[var(--color-text-secondary)]">
+            <p class="ot-add-questions__loading-tip-text">
+              Daily tip: Make sure to double-check the content, as it is AI-generated.
+            </p>
+          </div>
+          <div class="ot-add-questions__loading-ring-center">
+            <div
+              id="aq-generate-loading-ring"
+              class="ot-add-questions__loading-ring ot-student-progress-ring"
+              role="status"
+              aria-live="polite"
+              aria-label="Generating questions"
+            >
+              <svg class="ot-student-progress-ring__svg" viewBox="0 0 120 120" aria-hidden="true">
+                <defs>
+                  <linearGradient
+                    id="aq-generate-loading-grad"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="100%"
+                    gradientUnits="objectBoundingBox"
+                  >
+                    <stop offset="0%" class="ot-student-progress-ring__grad-from" />
+                    <stop offset="100%" class="ot-student-progress-ring__grad-to" />
+                  </linearGradient>
+                </defs>
+                <circle
+                  class="ot-student-progress-ring__fill ot-add-questions__loading-ring-arc"
+                  cx="60"
+                  cy="60"
+                  r="57.5"
+                  fill="none"
+                  stroke="url(#aq-generate-loading-grad)"
+                  transform="rotate(-90 60 60)"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="add-questions.js"></script>
+  </body>
+</html>

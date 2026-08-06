@@ -1,0 +1,4444 @@
+/* ========================================================================
+   Premium UI tokens (cool / indigo brand): no flat neutrals; brand temperature
+   runs through surfaces, borders, text tiers, and shadows — not black rgba(0,0,0).
+   Default theme: data-theme="cool" on <html>. See DESIGN_SYSTEM.md.
+   ======================================================================== */
+:root {
+  --color-accent-primary: #4233e4;
+  --color-accent-muted: #a5b4fc;
+  --color-brand-rgb: 66, 51, 228;
+
+  /* Surfaces: canvas = airy page field (almost white); surface = cards + sidebar (same fill, elevated read) */
+  /* Slightly darker canvas than pure near-white — eases long-session glare without a “grey UI” shift */
+  --color-bg-canvas: #f7f8fa;
+  --color-bg-surface: #fdfdff;
+  --color-bg-subtle: #f4f4f8;
+  --color-bg-surface-rgb: 253, 253, 255;
+  --color-surface-primary: var(--color-bg-surface);
+
+  /* Shared brand gradient (analytics ring, generate CTA hover — design tokens only) */
+  --gradient-brand-start: color-mix(in srgb, var(--color-accent-primary) 70%, white);
+  --gradient-brand-end: var(--color-accent-muted);
+
+  /* Text hierarchy: near-black + cool grey tiers (not #000 / #666 / #999) */
+  --color-text-primary: #10131f;
+  --color-text-secondary: #5c6470;
+  --color-text-muted: #7a8ba0;
+  --color-text: var(--color-text-primary);
+  --color-text-2: var(--color-text-secondary);
+
+  /* Borders: grey + brand temperature */
+  --color-border-default: #e4e8f5;
+  --color-border-muted: #d1d5e3;
+  --color-border-strong: #c5c9d8;
+  --color-border-subtle: var(--color-border-muted);
+
+  /* Badges / chips: hue-accurate brand tint — not generic grey */
+  --color-brand-subtle: #eef3ff;
+
+  --color-focus-ring: rgba(66, 51, 228, 0.35);
+  --color-text-on-primary: #ffffff;
+
+  /* Data (quiz levels / charts) */
+  --color-data-easy: #10b981;
+  --color-data-medium: #f97316;
+  --color-data-hard: #8b5cf6;
+
+  /* Shadows: brand temperature — never flat black paste-on */
+  --shadow-sm:
+    0 1px 3px rgba(var(--color-brand-rgb), 0.05),
+    0 0 0 1px rgba(var(--color-brand-rgb), 0.025);
+  --shadow-md:
+    0 1px 3px rgba(var(--color-brand-rgb), 0.06),
+    0 4px 16px rgba(var(--color-brand-rgb), 0.045),
+    0 0 0 1px rgba(var(--color-brand-rgb), 0.03);
+  --shadow-lg:
+    0 12px 40px rgba(var(--color-brand-rgb), 0.09),
+    0 2px 8px rgba(var(--color-brand-rgb), 0.05),
+    0 0 0 1px rgba(var(--color-brand-rgb), 0.035);
+  /* Back-compat: cards use md stack */
+  --shadow-card: var(--shadow-md);
+
+  /* Space — 8px grid */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-14: 56px;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 9999px;
+  --radius-card: var(--radius-md);
+  /* Figma OneTutor DS — node 2554:3804 (Generation Parameters “Half” card) */
+  --color-border-ds: #cbd5e1;
+  --color-ds-text-main: #080b16;
+  --color-ds-placeholder: #94a3b8;
+  --color-ds-text-light: #64748b;
+  --color-ds-card-fill: #fefefe;
+  --radius-ds-half-card: 6px;
+
+  /* Layout shell */
+  --layout-max-width: 1280px;
+  --layout-content-max: 1028px;
+  --layout-gutter: clamp(24px, 4vw, 48px);
+  --layout-section-gap: var(--space-12);
+  --layout-section-gap-lg: var(--space-14);
+  --layout-top-insights-col-right: minmax(300px, 354px);
+
+  /* Motion */
+  --motion-fast: 120ms;
+  --motion-base: 180ms;
+  --motion-slow: 340ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --hover-fade-duration: 340ms;
+  --ease-hover-fade: cubic-bezier(0.33, 0, 0.2, 1);
+  /* Sitewide hover tooltips (.ot-hover-tooltip) */
+  --ot-tooltip-show-delay: 0.45s;
+  --ot-tooltip-fade-in-duration: 0.22s;
+  --ot-tooltip-fade-out-duration: 0.15s;
+  --ot-tooltip-ease-in: cubic-bezier(0.42, 0, 1, 1);
+  --ot-tooltip-ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* Hover wash: lighter than before — mostly neutral, whisper of brand */
+  --color-hover-overlay: #f8f8fd;
+  --hover-button-border: #a5b4fc;
+
+  /* Hover UI modes — shared tokens (see “Hover interaction modes” block below) */
+  --hover-surface: var(--color-hover-overlay);
+  --hover-fg: var(--onetutor-brand-primary);
+  --hover-border-strong: var(--hover-button-border);
+  --icon-stroke-default: 1.35;
+  --icon-stroke-analytics: 1.6;
+
+  /* Legacy OneTutor names (alias to semantic tokens) */
+  --onetutor-text-main: var(--color-text-primary);
+  --onetutor-brand-primary: var(--color-accent-primary);
+  --onetutor-brand-accent: var(--color-accent-muted);
+  --onetutor-brand-subtle: var(--color-brand-subtle);
+  --onetutor-card-fill-tint: var(--color-bg-canvas);
+  --onetutor-card-highlight: var(--color-bg-subtle);
+  --onetutor-card-border: var(--color-border-muted);
+  --onetutor-button-default: #1c1a28;
+  --onetutor-button-disabled: #a5b4fc;
+  --onetutor-level-easy: var(--color-data-easy);
+  --onetutor-level-medium: var(--color-data-medium);
+  --onetutor-level-hard: var(--color-data-hard);
+  --slate-200: var(--color-border-default);
+  --slate-500: var(--color-text-secondary);
+  --white: var(--color-bg-surface);
+
+  /* Typography foundation (Figma node 2295:3303) — hierarchy:
+     Display H1 (40) → Page H2 (32) → Card H3 (24) → Compact H4 (20)
+     Body: lead (22) → default (16) → small UI (14) → meta (12)
+     Use --type-* sizes + classes below; avoid one-off px in components. */
+  --font-display: "Suisse Intl Trial", Inter, system-ui, sans-serif;
+  --font-body: Inter, system-ui, sans-serif;
+  --type-line-display: 1.2;
+  --type-line-body: 20px; /* single-line rhythm for 12–16px Inter body */
+
+  --type-heading-1: 40px;
+  --type-heading-1-tracking: -1px;
+  --type-heading-2: 32px;
+  --type-heading-3: 24px;
+  --type-heading-4: 20px;
+  --type-body-lg: 22px;
+  --type-body-md: 16px;
+  --type-body-main: var(--type-body-md);
+  --type-body-sm: 14px;
+  --type-body-xs: 12px;
+  /* One 14px step: UI body + optional label/eyebrow headings share --type-body-sm */
+  --type-heading-5: var(--type-body-sm);
+  --type-body-lg-line: 28px; /* lead / names: comfortable line for 22px */
+
+  --pill-file-text: #3b82f6;
+  --pill-file-border: #93c5fd;
+}
+
+@supports (color: color-mix(in srgb, white, black)) {
+  :root {
+    --color-hover-overlay: color-mix(in srgb, var(--color-accent-primary) 4%, var(--color-bg-surface) 96%);
+    --color-brand-subtle: color-mix(in srgb, var(--color-accent-primary) 10%, var(--color-bg-surface) 90%);
+  }
+}
+
+/* ========================================================================
+   Hover interaction modes (tokenized)
+   — Surface: full-area wash; bordered controls add --hover-border-strong + --hover-fg
+   — Interactive: primary label + circular chip on icon (.ot-hover-mode--interactive)
+   — Object: lifted card — shadow + inset wash + border (.ot-hover-mode--object, alias .ot-card-hover)
+   Shared: --hover-surface, --hover-fg, --hover-border-strong
+   ======================================================================== */
+
+/* Mode: interactive — opt in via .ot-hover-mode--interactive on the hover target */
+.ot-hover-mode--interactive {
+  transition: color var(--hover-fade-duration) var(--ease-hover-fade);
+}
+.ot-hover-mode--interactive:hover {
+  color: var(--hover-fg);
+}
+/* Breadcrumb crumbs only — don’t force .ot-body-small to inherit on analytics cards (description stays muted) */
+.ot-breadcrumb .ot-hover-mode--interactive:hover .ot-body-small {
+  color: inherit;
+}
+.ot-hover-mode--interactive:hover .ot-chat-history-label {
+  color: inherit;
+}
+.ot-hover-mode--interactive:hover .ot-section-title {
+  color: var(--hover-fg);
+}
+.ot-hover-mode--interactive:hover .ot-analytics-feature-link {
+  color: var(--hover-fg);
+}
+.ot-hover-mode--interactive:hover .ot-icon-circle--breadcrumb,
+.ot-hover-mode--interactive:hover .ot-icon-circle--breadcrumb-sep,
+.ot-hover-mode--interactive:hover .ot-icon-circle--nav,
+.ot-hover-mode--interactive:hover .ot-icon-circle--trailing {
+  background-color: var(--hover-surface);
+  color: var(--hover-fg);
+}
+
+body {
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-canvas);
+  font-family: Inter, system-ui, sans-serif;
+}
+
+/* Student materials rail: no upload row above, so keep rail flush to section title (instructor uses mt-6 after upload) */
+#course-main[data-course-view="student"] [data-rail-materials] {
+  margin-top: 0;
+}
+
+/* Figma 2461:9049 — compact Course analytics (6px radius; student + instructor) */
+#course-main[data-course-view="student"] #analytics-compact-card.student-analytics-compact-figma,
+#course-main[data-course-view="instructor"] #analytics-compact-card.instructor-analytics-compact-figma {
+  border-radius: 6px;
+  align-items: stretch;
+}
+#course-main[data-course-view="student"] #analytics-compact-card #analytics-body,
+#course-main[data-course-view="instructor"] #analytics-compact-card #analytics-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+  padding-top: var(--space-4);
+  padding-bottom: var(--space-4);
+  text-align: center;
+}
+/* Inset groove + rim stroke (student: completion; instructor: class engagement) */
+#course-main[data-course-view="student"] .ot-student-progress-ring,
+#course-main[data-course-view="instructor"] .ot-student-progress-ring {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-inline: auto;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow:
+    inset 0 3px 10px rgba(var(--color-brand-rgb), 0.1),
+    inset 0 1px 3px rgba(16, 19, 31, 0.07),
+    inset 0 -1px 2px rgba(255, 255, 255, 0.5);
+}
+#course-main[data-course-view="student"] .ot-student-progress-ring__svg,
+#course-main[data-course-view="instructor"] .ot-student-progress-ring__svg {
+  position: relative;
+  z-index: 1;
+  width: 200px;
+  height: 200px;
+  transform: translateZ(0);
+}
+.ot-student-progress-ring__grad-from {
+  stop-color: var(--gradient-brand-start);
+}
+.ot-student-progress-ring__grad-to {
+  stop-color: var(--gradient-brand-end);
+}
+#course-main[data-course-view="student"] .ot-student-progress-ring__fill,
+#course-main[data-course-view="instructor"] .ot-student-progress-ring__fill {
+  /* Stroke width matches Lucide icons (1.35px at 24px); scales with 120×200 viewBox */
+  stroke-width: calc(var(--icon-stroke-default) * 120 / 200);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 0 1;
+  stroke-dashoffset: 0;
+}
+#course-main[data-course-view="student"] .ot-student-progress-ring__label,
+#course-main[data-course-view="instructor"] .ot-student-progress-ring__label {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  text-align: center;
+  pointer-events: none;
+  width: 100%;
+}
+#course-main[data-course-view="student"] .ot-student-progress-ring__value-row,
+#course-main[data-course-view="instructor"] .ot-student-progress-ring__value-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 1px;
+  line-height: 1;
+}
+#course-main[data-course-view="student"] .ot-student-progress-ring__num,
+#course-main[data-course-view="instructor"] .ot-student-progress-ring__num {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--type-heading-2);
+  line-height: var(--type-line-display);
+  letter-spacing: -0.025em;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-primary);
+}
+#course-main[data-course-view="student"] .ot-student-progress-ring__pct,
+#course-main[data-course-view="instructor"] .ot-student-progress-ring__pct {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--type-heading-4);
+  line-height: var(--type-line-display);
+  letter-spacing: -0.025em;
+  color: var(--color-text-secondary);
+}
+#course-main[data-course-view="student"] .ot-student-progress-ring__caption,
+#course-main[data-course-view="instructor"] .ot-student-progress-ring__caption {
+  margin-top: var(--space-1);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--type-body-xs);
+  line-height: var(--type-line-body);
+  letter-spacing: 0;
+  color: var(--color-text-muted);
+}
+
+/* Student expanded — quiz improvement chart + checklist */
+#course-main[data-course-view="student"] .student-quiz-improvement-chart-wrap {
+  position: relative;
+  height: 280px;
+  width: 100%;
+  min-width: 0;
+}
+.ot-student-quiz-checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-height: 220px;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+.ot-student-quiz-checklist__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-muted);
+  background: var(--color-bg-surface);
+  cursor: pointer;
+  transition:
+    background-color var(--hover-fade-duration) var(--ease-hover-fade),
+    border-color var(--hover-fade-duration) var(--ease-hover-fade);
+}
+.ot-student-quiz-checklist__item:hover {
+  border-color: var(--color-border-strong);
+  background: var(--hover-surface);
+}
+.ot-student-quiz-checklist__item:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 2px;
+}
+.ot-student-quiz-checklist__item--done {
+  border-color: color-mix(in srgb, var(--onetutor-level-easy) 40%, var(--color-border-muted));
+  background: color-mix(in srgb, var(--onetutor-level-easy) 7%, var(--color-bg-surface));
+}
+.ot-student-quiz-checklist__item--done:hover {
+  border-color: color-mix(in srgb, var(--onetutor-level-easy) 55%, var(--color-border-strong));
+  background: color-mix(in srgb, var(--onetutor-level-easy) 12%, var(--hover-surface));
+}
+.ot-student-quiz-checklist__marker {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+  color: var(--onetutor-level-easy);
+}
+.ot-student-quiz-checklist__item:not(.ot-student-quiz-checklist__item--done) .ot-student-quiz-checklist__marker {
+  color: var(--color-text-muted);
+}
+.ot-student-quiz-checklist__icon-todo {
+  stroke-width: var(--icon-stroke-default);
+}
+.ot-student-quiz-checklist__main {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.ot-student-quiz-checklist__title {
+  font-size: var(--type-body-sm);
+  line-height: var(--type-line-body);
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+.ot-student-quiz-checklist__meta {
+  font-size: var(--type-body-xs);
+  color: var(--color-text-secondary);
+}
+
+/* Main layout shell (max-width + rhythm) */
+.ot-main {
+  flex: 1 1 0%;
+  min-height: 0;
+  overflow-y: auto;
+  padding-top: var(--space-10);
+  padding-bottom: var(--space-14);
+}
+.ot-shell {
+  width: 100%;
+  max-width: var(--layout-max-width);
+  margin-inline: auto;
+  padding-inline: var(--layout-gutter);
+  box-sizing: border-box;
+}
+.ot-section {
+  margin-top: var(--layout-section-gap);
+}
+.ot-section--first {
+  margin-top: var(--layout-section-gap-lg);
+}
+.ot-section--nested {
+  margin-top: var(--space-6);
+}
+.ot-page-header-grid {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+}
+@media (max-width: 1024px) {
+  .ot-page-header-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.ot-top-insights-grid {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: minmax(0, 1fr) var(--layout-top-insights-col-right);
+}
+@media (max-width: 1024px) {
+  .ot-top-insights-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Content width alignment (rails, upload, expanded analytics) */
+.ot-rail,
+.ot-section-frame,
+.analytics-expanded-card,
+.ot-upload-row {
+  width: 100%;
+  max-width: var(--layout-content-max);
+}
+/* Match full shell width like top row (chat + Course analytics right edge) */
+.ot-section--span-insights-width .ot-section-frame,
+.ot-section--span-insights-width .ot-rail,
+.ot-section--span-insights-width .ot-upload-row {
+  max-width: none;
+}
+
+/* Card surface — same fill as #sidebar (--color-bg-surface); border + shadow define the panel */
+.ot-card-surface {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-default);
+  background-color: var(--color-bg-surface);
+  box-shadow: var(--shadow-md);
+}
+/* Quick chat + compact Course analytics — muted border token */
+#chat-card.ot-card-surface,
+#analytics-compact-card.ot-card-surface {
+  border-color: var(--color-border-muted);
+}
+
+/* Focus visibility (keyboard) */
+.ot-btn-primary:focus-visible,
+.ot-btn-secondary:focus-visible,
+.ot-bordered-surface-hover:focus-visible,
+.ot-chat-history-pill:focus-visible,
+.ot-breadcrumb-back:focus-visible,
+.ot-rail-arrow:focus-visible,
+.ot-chat-see-all:focus-visible,
+.ot-course-instructor-msg-btn:focus-visible,
+.ot-analytics-tooltip-external__action:focus-visible,
+.ot-chat-icon-btn:focus-visible,
+#analytics-toggle:focus-visible,
+#analytics-collapse:focus-visible,
+#sidebar-toggle:focus-visible,
+#sidebar button:focus-visible,
+#sidebar li:focus-visible,
+.ot-section-title:focus-visible,
+a.ot-section-title:focus-visible,
+.ot-breadcrumb button:focus-visible,
+.ot-analytics-feature-link:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Text styles — map to :root --type-* (see Typography foundation) */
+.ot-h1 {
+  font-family: var(--font-display);
+  font-weight: 400; /* Book */
+  font-size: var(--type-heading-1);
+  line-height: var(--type-line-display);
+  letter-spacing: -0.025em;
+}
+.ot-h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--type-heading-2);
+  line-height: var(--type-line-display);
+  letter-spacing: -0.025em;
+}
+.ot-h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--type-heading-3);
+  line-height: var(--type-line-display);
+  letter-spacing: -0.025em;
+}
+.ot-h4 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--type-heading-4);
+  line-height: var(--type-line-display);
+  letter-spacing: -0.025em;
+}
+h4 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--type-heading-4);
+  line-height: var(--type-line-display);
+  letter-spacing: -0.025em;
+  color: var(--onetutor-text-main);
+  margin: 0;
+}
+.ot-body-regular {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--type-body-md);
+  line-height: var(--type-line-body);
+  letter-spacing: 0;
+}
+.ot-body-small {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--type-body-sm);
+  line-height: var(--type-line-body);
+  letter-spacing: 0;
+}
+.ot-body-tiny {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--type-body-xs);
+  line-height: var(--type-line-body);
+  letter-spacing: 0;
+}
+
+/* Figma card title — tier: H3 (24) */
+.ot-card-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--type-heading-3);
+  line-height: var(--type-line-display);
+  letter-spacing: -0.025em;
+  color: var(--color-text-primary);
+}
+
+/* Compact card title — tier: H4 (20) */
+.ot-card-title-compact {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--type-heading-4);
+  line-height: var(--type-line-display);
+  letter-spacing: -0.5px;
+  color: var(--onetutor-text-main);
+}
+
+.ot-rail {
+  position: relative;
+}
+
+/* Subtle “more content” fade (similar to Figma) */
+.ot-rail-fade::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 220px;
+  height: 192px;
+  pointer-events: none;
+  background: linear-gradient(
+    270deg,
+    rgba(var(--color-bg-surface-rgb), 1) 0%,
+    rgba(var(--color-bg-surface-rgb), 0.96) 24%,
+    rgba(var(--color-bg-surface-rgb), 0.72) 55%,
+    rgba(var(--color-bg-surface-rgb), 0) 100%
+  );
+}
+
+.ot-rail-arrow {
+  position: absolute;
+  right: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  padding: 6px;
+  border-radius: 9999px;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  z-index: 3;
+  cursor: pointer;
+  color: var(--onetutor-text-main);
+  transition: background-color var(--hover-fade-duration) var(--ease-hover-fade), color var(--hover-fade-duration) var(--ease-hover-fade);
+}
+.ot-rail-arrow:hover {
+  background-color: var(--hover-surface);
+  color: var(--hover-fg);
+}
+.ot-arrow-icon {
+  width: 24px;
+  height: 24px;
+  /* stroke matches course-management chevron via .ot-thin-arrow / rail rules */
+}
+
+.ot-hover-mode--object,
+.ot-card-hover {
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: transform var(--motion-base) var(--ease-standard), box-shadow var(--hover-fade-duration) var(--ease-hover-fade), border-color var(--hover-fade-duration) var(--ease-hover-fade);
+  will-change: transform;
+}
+.ot-hover-mode--object:hover,
+.ot-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md), inset 0 0 0 9999px var(--hover-surface);
+  border-color: var(--hover-border-strong) !important;
+}
+
+.analytics-expanded-card {
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-card);
+  background: var(--color-bg-surface);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-6);
+}
+.analytics-collapse-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  color: var(--onetutor-text-main);
+  transition: color var(--motion-fast) var(--ease-standard), transform var(--motion-fast) var(--ease-standard);
+}
+.analytics-collapse-btn:hover {
+  color: var(--hover-fg);
+  transform: translateY(-1px);
+}
+.ot-thin-arrow {
+  stroke-width: var(--icon-stroke-analytics);
+}
+
+/* Thinner strokes sitewide; Course Analytics keeps stronger weight */
+main svg,
+aside svg {
+  stroke-width: var(--icon-stroke-default);
+}
+.ot-analytics-scope svg {
+  stroke-width: var(--icon-stroke-analytics) !important;
+}
+.ot-rail-arrow svg,
+main .ot-thin-arrow,
+aside .ot-thin-arrow {
+  stroke-width: var(--icon-stroke-analytics) !important;
+}
+
+/* Circular icon hit (matches Course analytics chevron) */
+.ot-icon-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 9999px;
+  box-sizing: content-box;
+  color: var(--onetutor-text-main);
+  flex-shrink: 0;
+  transition: background-color var(--hover-fade-duration) var(--ease-hover-fade), color var(--hover-fade-duration) var(--ease-hover-fade);
+}
+#analytics-toggle:hover #analytics-chevron.ot-icon-circle,
+.analytics-collapse-btn:hover .ot-icon-circle--collapse {
+  background-color: var(--hover-surface);
+  color: var(--hover-fg);
+}
+/* Bordered light surfaces — hover wash + soft fade */
+.ot-bordered-surface-hover {
+  transition: background-color var(--hover-fade-duration) var(--ease-hover-fade);
+}
+.ot-bordered-surface-hover:hover {
+  background-color: var(--hover-surface);
+}
+.analytics-info-card,
+.improve-ai-card {
+  cursor: pointer;
+  border-radius: var(--radius-card);
+}
+/* Compact Course analytics: hover overlay on chevron only (not full card) */
+#analytics-toggle {
+  border-radius: 8px;
+}
+.ot-chat-see-all {
+  padding: 8px 14px;
+  margin: -8px -14px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+  transition: color var(--hover-fade-duration) var(--ease-hover-fade);
+  color: inherit;
+}
+.ot-chat-see-all:hover {
+  color: var(--hover-fg);
+}
+.analytics-pane.hidden {
+  display: none;
+}
+.ot-analytics-feature-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  color: var(--onetutor-text-main);
+  text-decoration: none;
+  text-align: left;
+  cursor: pointer;
+  transition: color var(--hover-fade-duration) var(--ease-hover-fade);
+}
+.ot-analytics-feature-link h4 {
+  color: inherit;
+}
+.ot-analytics-feature-link i,
+.analytics-card-icon {
+  color: var(--onetutor-text-main);
+  transition: color var(--motion-fast) var(--ease-standard);
+}
+/* Figma 2454:3730 (page title) */
+/* Page title — tier: H2 (32), same band as .ot-section-title */
+.ot-page-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--type-heading-2);
+  line-height: var(--type-line-display);
+  letter-spacing: -0.025em;
+  color: var(--color-text-primary);
+}
+
+/* Figma 2459:6635 Course_Description */
+.ot-course-instructor {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+.ot-course-instructor-avatar {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+.ot-course-instructor-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.ot-course-instructor-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3); /* Figma spacing/sp-12 between name block + description */
+  max-width: 592px;
+  width: 100%;
+  min-width: 0;
+}
+/* Figma 2461:9330 / 2334:3225 — name + send: sp-12 → --space-3; icon/send 2334:3221 */
+.ot-course-instructor-name-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3); /* Figma spacing/sp-12 */
+  flex-wrap: wrap;
+  min-width: 0;
+  overflow: visible;
+}
+/* Outline send: stroke = --color-accent-primary (Figma brand-primary #4233E4); 24×24 artboard */
+.ot-course-instructor-msg-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: content-box;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-accent-primary);
+  cursor: pointer;
+  transition: color var(--hover-fade-duration) var(--ease-hover-fade),
+    background-color var(--hover-fade-duration) var(--ease-hover-fade);
+}
+.ot-course-instructor-msg-btn:hover {
+  color: var(--color-accent-primary);
+  background-color: var(--hover-surface);
+}
+.ot-course-instructor-msg-btn:active {
+  color: color-mix(in srgb, var(--color-accent-primary) 88%, var(--color-text-primary) 12%);
+}
+.ot-course-instructor-msg-btn i[data-lucide] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  color: inherit;
+}
+.ot-course-instructor-msg-btn svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: var(--icon-stroke-default);
+}
+/* Lead line — tier: body-lg (22) */
+.ot-course-instructor-name {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--type-body-lg);
+  line-height: var(--type-body-lg-line);
+  letter-spacing: 0;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+/* Default long-form body — tier: body-md (16), light */
+.ot-course-instructor-desc {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: var(--type-body-md);
+  line-height: var(--type-line-body);
+  letter-spacing: 0;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+/* Section headers (Figma 2454:3732 / 2454:3733) */
+.ot-section-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--type-heading-2);
+  line-height: var(--type-line-display);
+  letter-spacing: -0.8px;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  transition: color var(--hover-fade-duration) var(--ease-hover-fade);
+}
+
+.ot-section-title-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Primary button (Figma 2461:8670) */
+.ot-btn-primary {
+  height: 40px;
+  border-radius: 6px;
+  background: var(--onetutor-button-default);
+  color: var(--color-text-on-primary);
+  padding: 8px 24px 8px 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  white-space: nowrap;
+  transition: background-color var(--hover-fade-duration) var(--ease-hover-fade), transform var(--motion-fast) var(--ease-standard);
+}
+.ot-btn-primary:not(:disabled):hover {
+  background: var(--color-accent-primary);
+  transform: translateY(-1px);
+}
+.ot-btn-primary:disabled {
+  background: var(--onetutor-button-disabled);
+  cursor: not-allowed;
+}
+
+/* Upload materials row (Figma 2461:8838) — border matches sidebar (--onetutor-card-border) */
+.ot-upload-row {
+  border: 1px solid var(--onetutor-card-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-6) var(--space-4) var(--space-6) var(--space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-bg-surface);
+}
+
+.ot-toggle {
+  width: 44px;
+  height: 24px;
+  border-radius: 9999px;
+  position: relative;
+  background: var(--color-border-default);
+  border: 1px solid var(--onetutor-card-border);
+  transition: background-color 150ms ease, border-color 150ms ease;
+  flex: 0 0 auto;
+}
+.ot-toggle::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: var(--color-bg-surface);
+  box-shadow: var(--shadow-sm);
+  transition: transform 150ms ease;
+}
+.ot-toggle[data-state="on"] {
+  background: var(--onetutor-brand-primary);
+  border-color: var(--onetutor-brand-primary);
+}
+.ot-toggle[data-state="on"]::after {
+  transform: translateX(20px);
+}
+
+/* Figma 2459:6609 (breadcrumb) */
+.ot-breadcrumb {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+.ot-breadcrumb-item {
+  padding: 8px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+.ot-breadcrumb-back {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  color: var(--onetutor-text-main);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px 2px 2px;
+  border-radius: 8px;
+}
+.ot-icon-circle--breadcrumb,
+.ot-icon-circle--breadcrumb-sep {
+  padding: 4px;
+}
+
+/* Figma Button-Secondary variants */
+.ot-btn-secondary {
+  height: 40px;
+  border: 1px solid var(--onetutor-card-border);
+  border-radius: 6px;
+  padding: 8px 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: transparent;
+  color: var(--onetutor-text-main);
+  white-space: nowrap;
+  transition: background-color var(--hover-fade-duration) var(--ease-hover-fade), border-color var(--hover-fade-duration) var(--ease-hover-fade), color var(--hover-fade-duration) var(--ease-hover-fade);
+}
+.ot-btn-secondary:hover {
+  background-color: var(--hover-surface);
+  border-color: var(--hover-border-strong);
+  color: var(--hover-fg);
+}
+.ot-btn-secondary--pill {
+  gap: 0;
+  font-weight: 400;
+}
+
+.ot-pill {
+  height: 24px;
+  padding: 0 12px;
+  border-radius: 50px;
+  border: 1px solid var(--onetutor-card-border);
+  background: var(--color-bg-surface);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+.ot-pill--file {
+  border-color: var(--pill-file-border);
+  color: var(--pill-file-text);
+}
+.ot-meta {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--type-body-xs);
+  line-height: var(--type-line-body);
+}
+.ot-meta-muted {
+  color: var(--color-text-muted);
+}
+.ot-actions {
+  background: var(--color-bg-surface);
+  border-radius: 50px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 2px 6px;
+}
+
+.analytics-radial {
+  background-color: var(--color-bg-surface);
+  background-image: radial-gradient(
+    177px 183.5px at 50% 50%,
+    rgba(66, 51, 228, 0.05) 0%,
+    rgba(78, 76, 226, 0.0459) 6.25%,
+    rgba(91, 102, 223, 0.0419) 12.5%,
+    rgba(116, 152, 218, 0.0338) 25%,
+    rgba(165, 252, 207, 0.0175) 50%,
+    rgba(var(--color-bg-surface-rgb), 0.05) 85%
+  );
+}
+
+/* Compact analytics hero ring + stat copy — brand RGB, not arbitrary indigo hex */
+.ot-analytics-radial-ring {
+  box-shadow: 4px 4px 4px 0 rgba(var(--color-brand-rgb), 0.35);
+}
+.ot-analytics-radial-stat {
+  color: var(--color-accent-primary);
+}
+
+/* Hue-accurate brand badge (article .card-badge pattern) */
+.ot-badge-brand {
+  display: inline-block;
+  background: var(--color-brand-subtle);
+  color: var(--color-accent-primary);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  padding: 3px 10px;
+  border-radius: 4px;
+}
+
+/* Hide scrollbars (WebKit + Firefox) */
+.scrollbar-none::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+.scrollbar-none {
+  scrollbar-width: none;
+}
+
+/* Flat surface (no gradient) — quick chat composer + quiz / material rail cards */
+.ot-solid-surface {
+  background-color: var(--color-bg-surface);
+  background-image: none;
+}
+
+/* Quick chat composer — grey border at rest; focus ring only (no inset hover wash) */
+.ot-chat-composer {
+  width: 100%;
+  min-height: 88px;
+  border-radius: 15px;
+  border: 1px solid var(--onetutor-card-border);
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 8px;
+  cursor: text;
+  transition: border-color var(--hover-fade-duration) var(--ease-hover-fade), box-shadow var(--hover-fade-duration) var(--ease-hover-fade);
+}
+.ot-chat-composer:hover:not(:focus-within) {
+  border-color: var(--color-border-strong);
+}
+.ot-chat-composer:focus-within {
+  border-color: var(--onetutor-card-border);
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+.ot-chat-composer:focus-within.ot-chat-composer--has-text {
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+/* No composer halo / inset wash behind prompt bubbles (reads as blur) */
+.ot-chat-composer.ot-chat-composer--prompts-open:focus-within {
+  box-shadow: none;
+}
+.ot-chat-composer.ot-chat-composer--prompts-open:focus-within.ot-chat-composer--has-text {
+  box-shadow: none;
+}
+/* Rotating placeholder = same typography + color as “Recent chats” row (ot-body-small + slate-500) */
+.ot-chat-input-wrap {
+  position: relative;
+  flex: 0 0 auto;
+  align-self: stretch;
+  min-height: 44px;
+  min-width: 0;
+  width: 100%;
+  display: block;
+}
+/* Typography + placeholder color match “Recent chats” row (ot-body-small + slate-500 on textarea class) */
+.ot-chat-input {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  min-width: 0;
+  margin: 0;
+  padding: 2px;
+  border: none;
+  background: transparent;
+  resize: none;
+  outline: none;
+  color: var(--color-text-primary);
+  box-sizing: border-box;
+  text-align: left;
+  -webkit-appearance: none;
+  appearance: none;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+.ot-chat-composer textarea.ot-chat-input.ot-body-small {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--type-body-sm);
+  line-height: var(--type-line-body);
+  letter-spacing: 0;
+}
+.ot-chat-input::placeholder {
+  font-weight: 400;
+  font-size: var(--type-body-sm);
+  line-height: var(--type-line-body);
+  letter-spacing: 0;
+  color: var(--slate-500);
+  opacity: 1;
+}
+
+/* Example prompt bubbles — show when composer is focused; bubbly stagger */
+.ot-chat-prompt-bubbles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: max-height 0.5s var(--ease-emphasized), opacity 0.4s var(--ease-hover-fade), transform 0.45s var(--ease-emphasized);
+}
+.ot-chat-composer.ot-chat-composer--prompts-open .ot-chat-prompt-bubbles {
+  max-height: 280px;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.ot-chat-prompt-bubble {
+  margin: 0;
+  padding: 8px 14px;
+  max-width: 100%;
+  border-radius: 9999px;
+  border: 1px solid var(--onetutor-card-border);
+  background: transparent;
+  box-shadow: none;
+  text-align: left;
+  cursor: pointer;
+  opacity: 0;
+  /* No scale() here — scale(0.94) read as “smaller type”; motion uses translate + opacity only */
+  transform: translateY(10px);
+  /* Entrance: slow ease. Hover paint (border/bg/color): same timing as .ot-chat-icon-btn — stagger delays must not apply to hover */
+  transition:
+    transform 0.42s var(--ease-emphasized),
+    opacity 0.42s var(--ease-hover-fade),
+    border-color var(--hover-fade-duration) var(--ease-hover-fade),
+    background-color var(--hover-fade-duration) var(--ease-hover-fade),
+    color var(--hover-fade-duration) var(--ease-hover-fade);
+}
+/* Same classes as “Recent chats” row: ot-body-small + text-[var(--slate-500)] — scoped for button preflight */
+.ot-chat-composer button.ot-chat-prompt-bubble.ot-body-small {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--type-body-sm);
+  line-height: var(--type-line-body);
+  letter-spacing: 0;
+  color: var(--slate-500);
+}
+.ot-chat-composer.ot-chat-composer--prompts-open .ot-chat-prompt-bubble {
+  opacity: 1;
+  transform: translateY(0);
+}
+.ot-chat-composer.ot-chat-composer--prompts-open .ot-chat-prompt-bubble:nth-child(1) {
+  transition-delay: 0.04s;
+}
+.ot-chat-composer.ot-chat-composer--prompts-open .ot-chat-prompt-bubble:nth-child(2) {
+  transition-delay: 0.1s;
+}
+.ot-chat-composer.ot-chat-composer--prompts-open .ot-chat-prompt-bubble:nth-child(3) {
+  transition-delay: 0.16s;
+}
+.ot-chat-composer.ot-chat-composer--prompts-open .ot-chat-prompt-bubble:nth-child(4) {
+  transition-delay: 0.22s;
+}
+.ot-chat-composer.ot-chat-composer--prompts-open .ot-chat-prompt-bubble:nth-child(5) {
+  transition-delay: 0.28s;
+}
+/* Hover must beat .ot-chat-prompt-bubble:nth-child(*) { transition-delay } or color/border feel laggy */
+.ot-chat-composer.ot-chat-composer--prompts-open .ot-chat-prompt-bubble.ot-body-small:hover {
+  border-color: var(--hover-border-strong);
+  background: var(--hover-surface);
+  color: var(--hover-fg);
+  transition-delay: 0s;
+}
+.ot-chat-prompt-bubble:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 2px;
+}
+.ot-chat-prompt-bubble:active {
+  transform: translateY(1px) scale(0.99);
+}
+@media (prefers-reduced-motion: reduce) {
+  .ot-chat-prompt-bubbles,
+  .ot-chat-prompt-bubble {
+    transition-duration: 0.01ms !important;
+  }
+  .ot-chat-composer.ot-chat-composer--prompts-open .ot-chat-prompt-bubble {
+    transition-delay: 0s !important;
+  }
+}
+
+.ot-chat-composer .ot-chat-icon-btn {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+  transition: color var(--hover-fade-duration) var(--ease-hover-fade),
+    filter var(--hover-fade-duration) var(--ease-hover-fade);
+}
+/* Info + edit: grey at rest; primary on hover */
+.ot-chat-composer .ot-chat-icon-btn:not(#chat-send):hover {
+  color: var(--hover-fg);
+}
+/* Send: black (default text) at rest; primary on hover */
+#chat-send.ot-chat-icon-btn {
+  color: var(--color-text-primary);
+}
+#chat-send.ot-chat-icon-btn:hover {
+  color: var(--hover-fg);
+}
+/* Filled send: Lucide circle-arrow-up — fill + ring use same color as the icon (currentColor).
+   paint-order stroke → fill keeps the disc from looking shrunken. */
+#chat-send.ot-chat-icon-btn svg circle {
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: 4;
+  paint-order: stroke fill;
+}
+#chat-send.ot-chat-icon-btn svg path {
+  stroke: var(--color-bg-surface);
+  fill: none;
+}
+.ot-chat-composer .ot-chat-icon-row {
+  gap: 12px;
+}
+
+#chat-card.chat-card-expanded {
+  width: 100%;
+  max-width: var(--layout-content-max);
+}
+#chat-card.chat-card-expanded .chat-history-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.analytics-chart-canvas-wrap {
+  position: relative;
+  border-radius: var(--radius-sm);
+  overflow: visible;
+  background-color: var(--color-bg-surface);
+  background-image: none;
+}
+
+/* Instructor — Chart.js external tooltip: dark surface + “Add to chat” (Student Performance Trends) */
+.ot-analytics-tooltip-external {
+  position: absolute;
+  z-index: 5;
+  min-width: 220px;
+  max-width: 300px;
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--onetutor-button-default);
+  color: var(--color-text-on-primary);
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.35;
+  box-shadow: var(--shadow-lg);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--ot-tooltip-fade-in-duration) var(--ot-tooltip-ease-in);
+}
+.ot-analytics-tooltip-external[aria-hidden="true"] {
+  pointer-events: none;
+}
+.ot-analytics-tooltip-external__title {
+  font-weight: 600;
+  font-size: 13px;
+  margin: 0 0 var(--space-2);
+  color: inherit;
+}
+.ot-analytics-tooltip-external__stats {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ot-analytics-tooltip-external__stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin: 0;
+}
+.ot-analytics-tooltip-external__stat-label {
+  opacity: 0.88;
+}
+.ot-analytics-tooltip-external__stat-value {
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+.ot-analytics-tooltip-external__action {
+  margin-top: var(--space-3);
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  border: 1px solid color-mix(in srgb, var(--color-text-on-primary) 35%, transparent);
+  background: color-mix(in srgb, var(--color-text-on-primary) 12%, transparent);
+  color: var(--color-text-on-primary);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color var(--hover-fade-duration) var(--ease-hover-fade),
+    border-color var(--hover-fade-duration) var(--ease-hover-fade);
+}
+.ot-analytics-tooltip-external__action:hover {
+  background: color-mix(in srgb, var(--color-text-on-primary) 22%, transparent);
+  border-color: color-mix(in srgb, var(--color-text-on-primary) 50%, transparent);
+}
+
+/* Dark hover hints (match analytics tooltip tokens) — chat icons + instructor message */
+.ot-hover-tooltip {
+  position: relative;
+}
+.ot-hover-tooltip__bubble {
+  position: absolute;
+  z-index: 40;
+  left: 50%;
+  bottom: 100%;
+  margin-bottom: 8px;
+  transform: translateX(-50%) translateY(6px);
+  min-width: max-content;
+  max-width: min(260px, 70vw);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--onetutor-button-default);
+  color: var(--color-text-on-primary);
+  font-family: var(--font-body);
+  font-size: var(--type-body-xs);
+  line-height: 1.35;
+  font-weight: 400;
+  text-align: center;
+  white-space: normal;
+  box-shadow: var(--shadow-md);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--ot-tooltip-fade-out-duration) var(--ot-tooltip-ease-out),
+    transform var(--ot-tooltip-fade-out-duration) var(--ot-tooltip-ease-out),
+    visibility 0s linear var(--ot-tooltip-fade-out-duration);
+}
+.ot-hover-tooltip:hover .ot-hover-tooltip__bubble,
+.ot-hover-tooltip:focus-visible .ot-hover-tooltip__bubble {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  transition:
+    opacity var(--ot-tooltip-fade-in-duration) var(--ot-tooltip-ease-in) var(--ot-tooltip-show-delay),
+    transform var(--ot-tooltip-fade-in-duration) var(--ot-tooltip-ease-in) var(--ot-tooltip-show-delay),
+    visibility 0s linear var(--ot-tooltip-show-delay);
+}
+.ot-course-instructor-msg-btn.ot-hover-tooltip .ot-hover-tooltip__bubble {
+  left: auto;
+  right: 0;
+  transform: translateX(0) translateY(6px);
+  text-align: left;
+}
+.ot-course-instructor-msg-btn.ot-hover-tooltip:hover .ot-hover-tooltip__bubble,
+.ot-course-instructor-msg-btn.ot-hover-tooltip:focus-visible .ot-hover-tooltip__bubble {
+  transform: translateX(0) translateY(0);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-qrow__actions .ot-hover-tooltip__bubble {
+  left: auto;
+  right: 0;
+  transform: translateX(0) translateY(6px);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-qrow__actions .ot-hover-tooltip:hover .ot-hover-tooltip__bubble,
+[data-page="manage-quizzes"] .ot-manage-quizzes-qrow__actions .ot-hover-tooltip:focus-visible .ot-hover-tooltip__bubble {
+  transform: translateX(0) translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --ot-tooltip-show-delay: 0s;
+    --ot-tooltip-fade-in-duration: 0.12s;
+    --ot-tooltip-fade-out-duration: 0.1s;
+  }
+}
+
+/* Must match .ot-card-surface background — single token so rail = card fill */
+#sidebar {
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-secondary);
+}
+#sidebar button,
+#sidebar li {
+  border-radius: 8px;
+  transition: background-color var(--hover-fade-duration) var(--ease-hover-fade);
+}
+/* Tight vertical rhythm (original space-y-3 lists); hover = mode: surface */
+#sidebar button:not(#sidebar-toggle),
+#sidebar li {
+  padding: 4px 6px;
+  margin: 0 -4px;
+}
+#sidebar button:not(#sidebar-toggle):hover,
+#sidebar li:hover {
+  background: var(--hover-surface);
+}
+#sidebar-toggle {
+  padding: 4px;
+  margin: 0;
+  border-radius: 8px;
+  transition: background-color var(--hover-fade-duration) var(--ease-hover-fade);
+}
+#sidebar-toggle:hover {
+  background: var(--hover-surface);
+}
+/* Sidebar Lucide: size comes from Tailwind (h-5 w-5); ID rule must not fix 1rem or it overrides utilities */
+#sidebar i[data-lucide] {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+#sidebar i[data-lucide] svg {
+  width: 100%;
+  height: 100%;
+  stroke-width: var(--icon-stroke-analytics) !important;
+}
+#sidebar li span[data-sidebar-label],
+#sidebar button span[data-sidebar-label] {
+  min-width: 0;
+}
+
+/* ========================================================================
+   Manage Quizzes — Figma 2461:9445 (Quiz overview), 2529:3306 (Questions list)
+   Scoped to [data-page="manage-quizzes"]; tokens only.
+   Main column uses same .ot-shell as index (layout-max-width + gutter).
+   Description / supporting copy: same monotone grey as homepage (ot-body-small + slate-500).
+   ======================================================================== */
+[data-page="manage-quizzes"] .ot-manage-quizzes-desc,
+[data-page="add-questions"] .ot-manage-quizzes-desc {
+  color: var(--slate-500);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-overview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  border-radius: 6px;
+  border: 1px solid var(--onetutor-card-border);
+  background-color: var(--color-bg-surface);
+  box-shadow: none;
+  padding: var(--space-6);
+}
+/* Breadcrumb: interactive hover → primary label (global breadcrumb rule otherwise keeps .ot-body-small muted) */
+[data-page="manage-quizzes"] .ot-breadcrumb .ot-hover-mode--interactive:hover .ot-body-small,
+[data-page="add-questions"] .ot-breadcrumb .ot-hover-mode--interactive:hover .ot-body-small,
+[data-page="materials-library"] .ot-breadcrumb .ot-hover-mode--interactive:hover .ot-body-small {
+  color: var(--hover-fg);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-search {
+  flex: 1 1 280px;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 40px;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--onetutor-card-border);
+  border-radius: 15px;
+  background: var(--color-bg-surface);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-search__icon {
+  width: 24px;
+  height: 24px;
+  color: var(--slate-500);
+  stroke-width: var(--icon-stroke-default);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-search__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: var(--type-body-xs);
+  line-height: var(--type-line-body);
+  color: var(--color-text-primary);
+  outline: none;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-search__input::placeholder {
+  color: var(--slate-500);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-search__input:focus-visible {
+  outline: none;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-search:focus-within {
+  box-shadow: none;
+  outline: none;
+  border-color: var(--onetutor-card-border);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-search__filter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border: none;
+  background: transparent;
+  color: var(--slate-500);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: color var(--hover-fade-duration) var(--ease-hover-fade);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-search__filter:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+  color: var(--hover-fg);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-toolbar__secondary {
+  height: 40px;
+  flex-shrink: 0;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(276px, 1fr));
+  gap: var(--space-2);
+  min-height: 120px;
+  margin-bottom: var(--space-2);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-grid--list {
+  grid-template-columns: 1fr;
+  max-width: 100%;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 232px;
+  padding: var(--space-6);
+  border-radius: 6px;
+  border: 1px solid var(--color-border-default);
+  background: var(--color-bg-surface);
+  text-align: left;
+  cursor: pointer;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-card--selected {
+  border-width: 2px;
+  border-color: var(--color-accent-muted);
+  background: var(--color-bg-surface);
+  box-shadow: var(--shadow-sm);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-card--selected.ot-hover-mode--object:hover {
+  border-color: var(--color-accent-muted) !important;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-card__title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+  min-height: 3rem;
+}
+/* Title typography matches homepage quiz rail (.ot-card-title-compact) */
+[data-page="manage-quizzes"] .ot-manage-quizzes-card__name {
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-card__type-pill {
+  flex-shrink: 0;
+  padding: 2px var(--space-3);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border-default);
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-card__blurb {
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: var(--slate-500);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-card__meta-value {
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-card__bottom {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-card__meta-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-card__levels {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-card__level {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-card__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-card__actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-card__icon-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0 var(--space-1);
+  border-radius: var(--radius-pill);
+  background: var(--color-bg-surface);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: color var(--hover-fade-duration) var(--ease-hover-fade);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-icon-btn:hover {
+  color: var(--hover-fg);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-icon-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+  color: var(--hover-fg);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding-top: var(--space-2);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-pagination__prev,
+[data-page="manage-quizzes"] .ot-manage-quizzes-pagination__next {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: var(--type-body-md);
+  line-height: var(--type-line-body);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--color-text-primary);
+  transition:
+    background-color var(--hover-fade-duration) var(--ease-hover-fade),
+    color var(--hover-fade-duration) var(--ease-hover-fade);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-pagination__next:hover {
+  background-color: var(--hover-surface);
+  color: var(--hover-fg);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-pagination__next:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-pagination__prev--disabled {
+  color: var(--slate-500);
+  opacity: 0.55;
+  pointer-events: none;
+  cursor: default;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-pagination__pages {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-pagination__page {
+  box-sizing: border-box;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  border: none;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: var(--type-body-md);
+  line-height: 1;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition:
+    background-color var(--hover-fade-duration) var(--ease-hover-fade),
+    color var(--hover-fade-duration) var(--ease-hover-fade);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-pagination__page:not(.ot-manage-quizzes-pagination__page--active):hover {
+  background-color: var(--hover-surface);
+  color: var(--hover-fg);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-pagination__page:not(.ot-manage-quizzes-pagination__page--active):focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+  color: var(--hover-fg);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-pagination__page--active {
+  background: var(--onetutor-button-default);
+  color: var(--color-text-on-primary);
+  cursor: default;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-pagination__page--active:hover {
+  background: var(--onetutor-button-default);
+  color: var(--color-text-on-primary);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-pagination__gap {
+  padding: var(--space-2) var(--space-4);
+  font-weight: 700;
+  color: var(--slate-500);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-questions {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--onetutor-card-border);
+  background: var(--color-bg-surface);
+  box-shadow: none;
+  padding: var(--space-6);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-questions__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-questions__title {
+  margin: 0;
+  flex: 1 1 12rem;
+  min-width: 0;
+  font-size: var(--type-heading-3);
+  line-height: var(--type-line-display);
+  letter-spacing: -0.025em;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-questions__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+}
+/* Questions list — flat list + dividers (no inner framed card) */
+[data-page="manage-quizzes"] .ot-manage-quizzes-qlist-wrap {
+  overflow: auto;
+  max-height: min(560px, 72vh);
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--onetutor-card-border) transparent;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-qlist {
+  min-width: min(100%, 700px);
+  font-family: var(--font-body);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-qlist__head {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: var(--space-3) var(--space-6) var(--space-3) var(--space-3);
+  margin-bottom: var(--space-2);
+  border-radius: 0;
+  background: var(--color-bg-surface);
+  border-bottom: 1px solid var(--onetutor-card-border);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-qlist__head-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 7rem 7rem 4.5rem 4.5rem 8rem;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 500;
+  font-size: var(--type-body-sm);
+  line-height: var(--type-line-body);
+  color: var(--slate-500);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-qlist__head-row .ot-manage-quizzes-qlist__cell--question {
+  justify-self: start;
+  text-align: left;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-qlist__head-row .ot-manage-quizzes-qlist__cell--badge,
+[data-page="manage-quizzes"] .ot-manage-quizzes-qlist__head-row .ot-manage-quizzes-qlist__cell--center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-self: center;
+  text-align: center;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-qlist__cell--question {
+  min-width: 0;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-qlist__cell--fixed {
+  flex-shrink: 0;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-qrow__grid .ot-manage-quizzes-qlist__cell--badge,
+[data-page="manage-quizzes"] .ot-manage-quizzes-qrow__grid .ot-manage-quizzes-qlist__cell--center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-self: center;
+  text-align: center;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-qrow__grid .ot-manage-quizzes-qlist__cell--center.ot-manage-quizzes-qrow__actions {
+  gap: var(--space-3);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-qrow__grid .ot-manage-quizzes-qlist__cell--question {
+  justify-self: start;
+  text-align: left;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-qlist__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-qrow {
+  /* Former row gap (space-2) folded into block padding so rhythm matches rounded “cards” */
+  padding: calc(var(--space-3) + var(--space-2) / 2) var(--space-6) calc(var(--space-3) + var(--space-2) / 2) var(--space-3);
+  border-radius: 0;
+  box-shadow: none;
+  border-bottom: 1px solid var(--onetutor-card-border);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-qrow__index,
+[data-page="manage-quizzes"] .ot-manage-quizzes-qrow__question {
+  transition: color 0.2s var(--ease-standard, ease);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-qlist__body .ot-manage-quizzes-qrow:last-child {
+  border-bottom: none;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-qrow__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 7rem 7rem 4.5rem 4.5rem 8rem;
+  align-items: center;
+  gap: var(--space-2);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-qrow__question-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-qrow__index {
+  flex-shrink: 0;
+  min-width: 1.75rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  color: var(--slate-500);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-qrow__question {
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-qrow__actions {
+  white-space: nowrap;
+}
+/* Match sidebar Lucide: h-5 w-5 (20px) + .ot-thin-arrow stroke (see #sidebar i[data-lucide]) */
+[data-page="manage-quizzes"] .ot-manage-quizzes-status-icon,
+[data-page="manage-quizzes"] .ot-manage-quizzes-status-toggle svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-status-icon {
+  display: block;
+  color: var(--color-accent-primary);
+  /* stroke: match sidebar via .ot-thin-arrow on the same <i> (main .ot-thin-arrow) */
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-status-icon.ot-manage-quizzes-status-icon--hidden {
+  color: var(--onetutor-card-border);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-qrow__actions .ot-manage-quizzes-row-action-icon,
+[data-page="manage-quizzes"] .ot-manage-quizzes-qrow__actions .ot-manage-quizzes-icon-btn svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-qrow__actions .ot-manage-quizzes-grip-icon,
+[data-page="manage-quizzes"] .ot-manage-quizzes-qrow__actions .ot-manage-quizzes-drag svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-qrow__actions .ot-manage-quizzes-grip-icon {
+  color: var(--slate-500);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-status-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  margin: 0;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-sm);
+  color: var(--slate-500);
+  cursor: pointer;
+  transition: color var(--hover-fade-duration) var(--ease-hover-fade);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-status-toggle:hover {
+  color: var(--hover-fg);
+}
+/* Hidden rows: same tone as sidebar / card border (--onetutor-card-border) */
+[data-page="manage-quizzes"] .ot-manage-quizzes-qrow--hidden .ot-manage-quizzes-qrow__question,
+[data-page="manage-quizzes"] .ot-manage-quizzes-qrow--hidden .ot-manage-quizzes-qrow__index,
+[data-page="manage-quizzes"] .ot-manage-quizzes-qrow--hidden .ot-manage-quizzes-qrow__index--skipped {
+  color: var(--onetutor-card-border);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-type-pill,
+[data-page="add-questions"] .ot-manage-quizzes-type-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 20px;
+  padding: 0 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border-default);
+  background: var(--color-bg-surface);
+  color: var(--slate-500);
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-diff {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+  font-weight: 500;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-diff--easy {
+  border: 1px solid color-mix(in srgb, var(--onetutor-level-easy) 55%, var(--color-border-muted));
+  color: var(--onetutor-level-easy);
+  background: color-mix(in srgb, var(--onetutor-level-easy) 8%, var(--color-bg-surface));
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-diff--medium {
+  border: 1px solid color-mix(in srgb, var(--onetutor-level-medium) 50%, var(--color-border-muted));
+  color: var(--onetutor-level-medium);
+  background: color-mix(in srgb, var(--onetutor-level-medium) 8%, var(--color-bg-surface));
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-diff--hard {
+  border: 1px solid color-mix(in srgb, var(--onetutor-level-hard) 45%, var(--color-border-muted));
+  color: var(--onetutor-level-hard);
+  background: color-mix(in srgb, var(--onetutor-level-hard) 8%, var(--color-bg-surface));
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-drag {
+  display: inline-flex;
+  vertical-align: middle;
+  cursor: grab;
+  opacity: 0.85;
+  padding: 2px;
+  border: none;
+  background: transparent;
+  color: inherit;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-drag:active {
+  cursor: grabbing;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-qrow--dragging {
+  opacity: 0.55;
+}
+[data-page="manage-quizzes"] .ot-manage-quizzes-qrow--drag-over {
+  background: color-mix(in srgb, var(--color-brand-subtle) 35%, var(--color-bg-surface));
+}
+[data-page="manage-quizzes"] .ot-breadcrumb a.ot-breadcrumb-back,
+[data-page="add-questions"] .ot-breadcrumb a.ot-breadcrumb-back,
+[data-page="materials-library"] .ot-breadcrumb a.ot-breadcrumb-back {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ========================================================================
+   Add questions — Figma 2602:4220 (Generate Questions)
+   Generation Parameters card — Figma 2554:3804 (Half)
+   Scoped to [data-page="add-questions"]; tokens only.
+   ======================================================================== */
+[data-page="add-questions"] .ot-add-questions__crumb-current {
+  background: var(--onetutor-card-highlight);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+}
+/* Primary column: breadcrumb + wizard + tip aligned and centered (narrower than full shell) */
+[data-page="add-questions"] .ot-add-questions__center-column {
+  width: 100%;
+  max-width: min(68rem, 100%);
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+[data-page="add-questions"] .ot-add-questions__wizard {
+  width: 100%;
+  margin-bottom: var(--space-6);
+}
+[data-page="add-questions"] .ot-add-questions__wizard-frame {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-5);
+  width: 100%;
+}
+@media (max-width: 520px) {
+  [data-page="add-questions"] .ot-add-questions__wizard-frame {
+    gap: var(--space-2);
+  }
+  [data-page="add-questions"] .ot-add-questions__wizard-rail-label {
+    display: none;
+  }
+}
+/* Homepage rail arrow affordance: circular hit, transparent → hover wash; labels “Back” / “Next” */
+[data-page="add-questions"] .ot-add-questions__wizard-rail-btn {
+  flex-shrink: 0;
+  align-self: center;
+  border: 0;
+  padding: 6px 10px;
+  border-radius: 9999px;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  z-index: 3;
+  cursor: pointer;
+  color: var(--onetutor-text-main);
+  transition:
+    background-color var(--hover-fade-duration) var(--ease-hover-fade),
+    color var(--hover-fade-duration) var(--ease-hover-fade),
+    opacity var(--hover-fade-duration) var(--ease-hover-fade);
+}
+[data-page="add-questions"] .ot-add-questions__wizard-rail-btn:hover:not(:disabled) {
+  background-color: var(--hover-surface);
+  color: var(--hover-fg);
+}
+[data-page="add-questions"] .ot-add-questions__wizard-rail-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+[data-page="add-questions"] .ot-add-questions__wizard-rail-btn:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 2px;
+}
+[data-page="add-questions"] .ot-add-questions__wizard-rail-label {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--type-body-sm);
+  line-height: var(--type-line-body);
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+[data-page="add-questions"] .ot-add-questions__wizard-rail-btn .ot-arrow-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+[data-page="add-questions"] .ot-add-questions__wizard-rail-btn svg {
+  stroke-width: var(--icon-stroke-analytics) !important;
+}
+[data-page="add-questions"] .ot-add-questions__wizard-viewport {
+  overflow: hidden;
+  width: 100%;
+  min-width: 0;
+  max-height: min(78vh, 700px);
+  border-radius: var(--radius-md);
+  border: 1px solid color-mix(in srgb, var(--onetutor-card-border) 85%, transparent);
+  box-shadow: var(--shadow-sm);
+  background: color-mix(in srgb, var(--color-bg-canvas) 40%, var(--color-bg-surface));
+}
+[data-page="add-questions"] .ot-add-questions__wizard-track {
+  display: flex;
+  width: 300%;
+  transition: transform 0.45s var(--ease-emphasized, cubic-bezier(0.2, 0.8, 0.2, 1));
+  will-change: transform;
+}
+[data-page="add-questions"] .ot-add-questions__wizard-panel {
+  flex: 0 0 33.333333%;
+  box-sizing: border-box;
+  min-width: 0;
+  max-height: min(78vh, 700px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+[data-page="add-questions"] .ot-add-questions__wizard-panel::-webkit-scrollbar {
+  width: 6px;
+}
+[data-page="add-questions"] .ot-add-questions__wizard-panel::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--color-text-secondary) 28%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-page="add-questions"] .ot-add-questions__wizard-track {
+    transition-duration: 0.01ms;
+  }
+}
+[data-page="add-questions"] .ot-add-questions__wizard-dots-row {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-6);
+  padding-top: var(--space-2);
+  width: 100%;
+}
+[data-page="add-questions"] .ot-add-questions__wizard-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}
+[data-page="add-questions"] .ot-add-questions__wizard-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: var(--onetutor-card-border);
+  cursor: pointer;
+  transition: background-color var(--hover-fade-duration) var(--ease-hover-fade), transform 0.2s ease;
+}
+[data-page="add-questions"] .ot-add-questions__wizard-dot--active {
+  background: var(--color-accent-primary);
+  transform: scale(1.15);
+}
+/* Wizard cards — rail-style shadow + structured header strip + padded body (product UI density) */
+[data-page="add-questions"] .ot-add-questions__half {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-default);
+  background-color: var(--color-bg-surface);
+  background-image: none;
+  padding: 0;
+  min-height: 0;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+/* Figma 2554:3804 / 2585:4185 — wizard “Half” cards (Generation Parameters + Select Materials) */
+[data-page="add-questions"] .ot-add-questions__half--params,
+[data-page="add-questions"] .ot-add-questions__half--materials {
+  border-radius: var(--radius-ds-half-card);
+  border: 1px solid var(--color-border-ds);
+  background-color: var(--color-ds-card-fill);
+  background-image:
+    linear-gradient(180deg, rgba(238, 242, 255, 0.2) 0%, rgba(249, 251, 255, 0.2) 100%),
+    linear-gradient(
+      180deg,
+      rgba(129, 140, 248, 0.02) 0%,
+      rgba(129, 140, 248, 0.02) 50%,
+      rgba(254, 254, 254, 0.02) 100%
+    ),
+    linear-gradient(90deg, var(--color-ds-card-fill) 0%, var(--color-ds-card-fill) 100%);
+  padding: var(--space-6);
+  overflow: visible;
+  box-shadow: var(--shadow-md);
+}
+[data-page="add-questions"] .ot-add-questions__half--params .ot-add-questions__params-head,
+[data-page="add-questions"] .ot-add-questions__half--materials .ot-add-questions__params-head {
+  padding: var(--space-4) 0;
+  margin: 0;
+  border-bottom: none;
+  background: none;
+}
+[data-page="add-questions"] .ot-add-questions__half--params .ot-add-questions__params-title,
+[data-page="add-questions"] .ot-add-questions__half--materials .ot-add-questions__params-title {
+  margin: 0;
+  color: var(--color-ds-text-main);
+}
+[data-page="add-questions"] .ot-add-questions__params-subtitle {
+  margin: var(--space-2) 0 0;
+  max-width: 42rem;
+}
+[data-page="add-questions"] .ot-add-questions__field-hint {
+  margin: 0 0 var(--space-1);
+}
+[data-page="add-questions"] .ot-add-questions__section-rule {
+  height: 0;
+  margin: var(--space-3) 0;
+  border: 0;
+  border-top: 1px solid var(--color-border-default);
+}
+[data-page="add-questions"] .ot-add-questions__params-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: 0;
+}
+[data-page="add-questions"] .ot-add-questions__params-body .ot-add-questions__stack {
+  margin-bottom: 0;
+}
+[data-page="add-questions"] .ot-add-questions__stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+[data-page="add-questions"] .ot-add-questions__stack--field {
+  gap: var(--space-2);
+}
+[data-page="add-questions"] .ot-add-questions__stack--ai {
+  gap: var(--space-3);
+  --aq-fill-pct: 50%;
+}
+[data-page="add-questions"] .ot-add-questions__half--params .ot-add-questions__stack--ai {
+  gap: var(--space-4);
+}
+[data-page="add-questions"] .ot-add-questions__half--params .ot-add-questions__label {
+  color: var(--color-ds-text-main);
+}
+[data-page="add-questions"] .ot-add-questions__half--params .ot-add-questions__text-input {
+  min-height: 40px;
+  box-sizing: border-box;
+  font-family: var(--font-body);
+  font-size: var(--type-body-xs);
+  line-height: 20px;
+  padding: var(--space-2) var(--space-3);
+  border-color: var(--color-border-ds);
+  color: var(--color-ds-text-main);
+}
+[data-page="add-questions"] .ot-add-questions__half--params .ot-add-questions__text-input::placeholder {
+  color: var(--color-ds-placeholder);
+}
+[data-page="add-questions"] .ot-add-questions__half--params .ot-add-questions__num-input {
+  width: 56px;
+  min-width: 56px;
+  min-height: 40px;
+  box-sizing: border-box;
+  font-family: var(--font-body);
+  font-size: var(--type-body-xs);
+  line-height: 20px;
+  padding: var(--space-2) var(--space-3);
+  border-color: var(--color-border-ds);
+}
+[data-page="add-questions"] .ot-add-questions__half--params .ot-add-questions__num-pair {
+  gap: var(--space-4);
+}
+[data-page="add-questions"] .ot-add-questions__half--params .ot-add-questions__stack .ot-add-questions__num-pair:first-of-type {
+  margin-top: 0;
+}
+[data-page="add-questions"] .ot-add-questions__half--params .ot-add-questions__num-pair + .ot-add-questions__num-pair {
+  margin-top: var(--space-2);
+}
+[data-page="add-questions"] .ot-add-questions__half--params .ot-add-questions__num-label {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--type-body-sm);
+}
+[data-page="add-questions"] .ot-add-questions__half--params .ot-add-questions__fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+[data-page="add-questions"] .ot-add-questions__half--params .ot-add-questions__radio {
+  margin-top: 0;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  transition: background-color var(--hover-fade-duration) var(--ease-hover-fade);
+}
+[data-page="add-questions"] .ot-add-questions__half--params .ot-add-questions__radio:hover {
+  background: color-mix(in srgb, var(--color-bg-canvas) 65%, var(--color-bg-surface));
+}
+[data-page="add-questions"] .ot-add-questions__half--params .ot-add-questions__radio input {
+  accent-color: var(--color-ds-text-main);
+}
+[data-page="add-questions"] .ot-add-questions__half--params .ot-add-questions__row-2 {
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 0;
+}
+[data-page="add-questions"] .ot-add-questions__label {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--type-body-main);
+  line-height: var(--type-line-body);
+  color: var(--color-text-primary);
+}
+[data-page="add-questions"] .ot-add-questions__legend-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+[data-page="add-questions"] .ot-add-questions__info-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--slate-500);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+[data-page="add-questions"] .ot-add-questions__info-btn:hover {
+  color: var(--color-accent-primary);
+}
+[data-page="add-questions"] .ot-add-questions__legend-inline .ot-add-questions__info-btn.ot-hover-tooltip {
+  position: relative;
+}
+[data-page="add-questions"] .ot-add-questions__legend-inline .ot-add-questions__info-btn.ot-hover-tooltip .ot-hover-tooltip__bubble {
+  left: auto;
+  right: 0;
+  transform: translateX(0) translateY(6px);
+  text-align: left;
+}
+[data-page="add-questions"] .ot-add-questions__legend-inline .ot-add-questions__info-btn.ot-hover-tooltip:hover .ot-hover-tooltip__bubble,
+[data-page="add-questions"] .ot-add-questions__legend-inline .ot-add-questions__info-btn.ot-hover-tooltip:focus-visible .ot-hover-tooltip__bubble {
+  transform: translateX(0) translateY(0);
+}
+[data-page="add-questions"] .ot-add-questions__text-input {
+  width: 100%;
+  border-radius: 15px;
+  border: 1px solid var(--onetutor-card-border);
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  padding: var(--space-3) var(--space-4);
+}
+[data-page="add-questions"] .ot-add-questions__text-input::placeholder {
+  color: var(--slate-500);
+}
+[data-page="add-questions"] .ot-add-questions__text-input:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--color-accent-primary) 45%, transparent);
+  outline-offset: 2px;
+}
+/* Describe field — Figma 2554:3804 textfield h-80; single outline on composer */
+[data-page="add-questions"] .ot-add-questions__describe-composer.ot-chat-composer {
+  min-height: auto;
+  border-color: var(--color-border-ds);
+}
+[data-page="add-questions"] .ot-add-questions__describe-composer .ot-chat-input-wrap {
+  min-height: 80px;
+}
+[data-page="add-questions"] .ot-add-questions__describe-composer textarea.ot-chat-input {
+  min-height: 80px;
+  font-family: var(--font-body);
+  font-size: var(--type-body-xs);
+  line-height: 20px;
+  color: var(--color-ds-text-main);
+}
+[data-page="add-questions"] .ot-add-questions__describe-composer textarea.ot-chat-input.ot-body-small {
+  font-size: var(--type-body-xs);
+  line-height: 20px;
+}
+[data-page="add-questions"] .ot-add-questions__describe-composer textarea.ot-chat-input::placeholder {
+  color: var(--color-ds-placeholder);
+  font-size: var(--type-body-xs);
+  line-height: 20px;
+}
+/* Figma 2554:3804 — Pill-Question_Type_Descriptor (+ icon, brand border, 12px Inter) */
+[data-page="add-questions"] .ot-add-questions__prompt-pills {
+  gap: var(--space-2);
+  row-gap: var(--space-2);
+  align-content: flex-start;
+}
+[data-page="add-questions"] .ot-chat-composer button.ot-add-questions__prompt-pill.ot-body-tiny {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 32px;
+  margin: 0;
+  padding: var(--space-2) var(--space-6) var(--space-2) var(--space-3);
+  border-radius: 50px;
+  border: 1px solid var(--color-accent-muted);
+  background: var(--color-bg-surface);
+  color: var(--color-accent-primary);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--type-body-xs);
+  line-height: 20px;
+  letter-spacing: 0;
+  box-shadow: none;
+  max-width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform 0.42s var(--ease-emphasized),
+    opacity 0.42s var(--ease-hover-fade),
+    border-color var(--hover-fade-duration) var(--ease-hover-fade),
+    background-color var(--hover-fade-duration) var(--ease-hover-fade),
+    color var(--hover-fade-duration) var(--ease-hover-fade);
+}
+[data-page="add-questions"] .ot-add-questions__prompt-pill-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  stroke-width: var(--icon-stroke-default);
+  color: var(--color-accent-primary);
+}
+[data-page="add-questions"] .ot-chat-composer.ot-chat-composer--prompts-open .ot-add-questions__prompt-pill:hover {
+  border-color: var(--color-accent-primary);
+  background: color-mix(in srgb, var(--color-brand-subtle) 70%, var(--color-bg-surface));
+  color: var(--color-accent-primary);
+  transition-delay: 0s;
+}
+[data-page="add-questions"] .ot-add-questions__row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+  margin-bottom: 0;
+}
+[data-page="add-questions"] .ot-add-questions__half--params .ot-add-questions__row-2 {
+  gap: var(--space-4);
+}
+@media (max-width: 640px) {
+  [data-page="add-questions"] .ot-add-questions__row-2 {
+    grid-template-columns: 1fr;
+  }
+}
+[data-page="add-questions"] .ot-add-questions__num-pair {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+[data-page="add-questions"] .ot-add-questions__num-input {
+  width: 4rem;
+  border-radius: 15px;
+  border: 1px solid var(--onetutor-card-border);
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  padding: var(--space-2) var(--space-3);
+  text-align: center;
+}
+[data-page="add-questions"] .ot-add-questions__num-label {
+  color: var(--color-text-primary);
+}
+[data-page="add-questions"] .ot-add-questions__fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+[data-page="add-questions"] .ot-add-questions__radio {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  font-size: var(--type-body-sm);
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+[data-page="add-questions"] .ot-add-questions__radio input {
+  accent-color: var(--color-accent-primary);
+}
+[data-page="add-questions"] .ot-add-questions__stack--ai .ot-add-questions__slider-labels {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  color: var(--color-text-primary);
+  margin-bottom: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--type-body-sm);
+  line-height: var(--type-line-body);
+}
+[data-page="add-questions"] .ot-add-questions__range--figma {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 20px;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+}
+[data-page="add-questions"] .ot-add-questions__range--figma::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: 40px;
+  border: 1px solid var(--onetutor-card-border);
+  background: linear-gradient(
+    to right,
+    var(--color-text-primary) 0%,
+    var(--color-text-primary) var(--aq-fill-pct),
+    var(--color-bg-surface) var(--aq-fill-pct),
+    var(--color-bg-surface) 100%
+  );
+}
+[data-page="add-questions"] .ot-add-questions__range--figma::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: -6px;
+  border-radius: 50%;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-text-primary);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--onetutor-card-border) 70%, transparent);
+}
+[data-page="add-questions"] .ot-add-questions__range--figma::-moz-range-track {
+  height: 8px;
+  border-radius: 40px;
+  border: 1px solid var(--onetutor-card-border);
+  background: linear-gradient(
+    to right,
+    var(--color-text-primary) 0%,
+    var(--color-text-primary) var(--aq-fill-pct),
+    var(--color-bg-surface) var(--aq-fill-pct),
+    var(--color-bg-surface) 100%
+  );
+}
+[data-page="add-questions"] .ot-add-questions__range--figma::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-text-primary);
+}
+[data-page="add-questions"] .ot-add-questions__range--figma:focus-visible::-webkit-slider-thumb {
+  outline: 2px solid color-mix(in srgb, var(--color-accent-primary) 45%, transparent);
+  outline-offset: 2px;
+}
+[data-page="add-questions"] .ot-add-questions__slider-current {
+  margin-top: 0;
+  color: var(--slate-500);
+}
+[data-page="add-questions"] .ot-add-questions__half--params .ot-add-questions__slider-current {
+  color: var(--color-ds-text-light);
+}
+[data-page="add-questions"] .ot-add-questions__half--params .ot-add-questions__stack--ai .ot-add-questions__slider-labels {
+  color: var(--color-ds-text-main);
+}
+[data-page="add-questions"] .ot-add-questions__half--params .ot-add-questions__range--figma::-webkit-slider-runnable-track {
+  border-color: var(--color-border-ds);
+  background: linear-gradient(
+    to right,
+    var(--color-ds-text-main) 0%,
+    var(--color-ds-text-main) var(--aq-fill-pct),
+    var(--color-bg-surface) var(--aq-fill-pct),
+    var(--color-bg-surface) 100%
+  );
+}
+[data-page="add-questions"] .ot-add-questions__half--params .ot-add-questions__range--figma::-moz-range-track {
+  border-color: var(--color-border-ds);
+  background: linear-gradient(
+    to right,
+    var(--color-ds-text-main) 0%,
+    var(--color-ds-text-main) var(--aq-fill-pct),
+    var(--color-bg-surface) var(--aq-fill-pct),
+    var(--color-bg-surface) 100%
+  );
+}
+[data-page="add-questions"] .ot-add-questions__half--params .ot-add-questions__range--figma::-webkit-slider-thumb {
+  border-color: var(--color-ds-text-main);
+}
+[data-page="add-questions"] .ot-add-questions__half--params .ot-add-questions__range--figma::-moz-range-thumb {
+  border-color: var(--color-ds-text-main);
+}
+/* Select Materials / Generate step — flat surface + rail card shadow (inherits .half) */
+[data-page="add-questions"] .ot-add-questions__wizard-panel--generate {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+}
+[data-page="add-questions"] .ot-add-questions__generate-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding-block: var(--space-8);
+  min-height: 11rem;
+}
+/* Generate CTA: rest = subtle surface; hover = same brand gradient as analytics ring “enters” the pill */
+[data-page="add-questions"] .ot-add-questions__generate-gradient-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4) var(--space-10);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--type-body-main);
+  line-height: var(--type-line-body);
+  letter-spacing: 0;
+  color: var(--color-accent-primary);
+  border: 1px solid color-mix(in srgb, var(--color-accent-muted) 55%, var(--color-border-default));
+  border-radius: 9999px;
+  cursor: pointer;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--color-accent-primary) 8%, var(--color-bg-surface));
+  box-shadow: var(--shadow-sm);
+  transition:
+    color 0.4s var(--ease-emphasized),
+    border-color 0.4s var(--ease-emphasized),
+    box-shadow 0.35s var(--ease-hover-fade),
+    transform 0.15s ease;
+}
+[data-page="add-questions"] .ot-add-questions__generate-gradient-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(128deg, var(--gradient-brand-start) 0%, var(--gradient-brand-end) 100%);
+  opacity: 0;
+  transform: scale(0.88);
+  transition:
+    opacity 0.45s var(--ease-emphasized),
+    transform 0.5s var(--ease-emphasized);
+  z-index: 0;
+}
+[data-page="add-questions"] .ot-add-questions__generate-gradient-btn:hover:not(:disabled):not([aria-busy="true"])::before {
+  opacity: 1;
+  transform: scale(1);
+}
+[data-page="add-questions"] .ot-add-questions__generate-gradient-btn:hover:not(:disabled):not([aria-busy="true"]) {
+  color: var(--color-text-on-primary);
+  border-color: color-mix(in srgb, var(--color-accent-primary) 40%, transparent);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+[data-page="add-questions"] .ot-add-questions__generate-gradient-btn:active:not(:disabled):not([aria-busy="true"]) {
+  transform: translateY(0);
+}
+[data-page="add-questions"] .ot-add-questions__generate-gradient-btn:focus-visible {
+  outline: 3px solid var(--color-focus-ring, color-mix(in srgb, var(--color-accent-primary) 55%, transparent));
+  outline-offset: 3px;
+}
+[data-page="add-questions"] .ot-add-questions__generate-gradient-btn:disabled,
+[data-page="add-questions"] .ot-add-questions__generate-gradient-btn[aria-busy="true"] {
+  cursor: wait;
+  opacity: 0.85;
+}
+[data-page="add-questions"] .ot-add-questions__generate-gradient-btn__inner {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-page="add-questions"] .ot-add-questions__generate-gradient-btn::before {
+    transition-duration: 0.01ms;
+  }
+  [data-page="add-questions"] .ot-add-questions__generate-gradient-btn:hover:not(:disabled):not([aria-busy="true"])::before {
+    transform: scale(1);
+  }
+}
+
+/* Full-screen loading: daily tip + analytics-style ellipse */
+[data-page="add-questions"] .ot-add-questions__loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: max(var(--space-10), env(safe-area-inset-top)) var(--space-6) var(--space-8);
+  background: color-mix(in srgb, var(--color-bg-canvas) 92%, var(--color-text-primary) 8%);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+[data-page="add-questions"] .ot-add-questions__loading-overlay.hidden {
+  display: none;
+}
+[data-page="add-questions"] .ot-add-questions__loading-tip {
+  width: 100%;
+  max-width: 36rem;
+  margin-inline: auto;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(-12px);
+  transition: opacity 0.85s ease-out, transform 0.85s ease-out;
+}
+[data-page="add-questions"] .ot-add-questions__loading-overlay--visible .ot-add-questions__loading-tip {
+  opacity: 1;
+  transform: translateY(0);
+}
+[data-page="add-questions"] .ot-add-questions__loading-tip-text {
+  margin: 0;
+}
+[data-page="add-questions"] .ot-add-questions__loading-ring-center {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: min(50vh, 420px);
+}
+[data-page="add-questions"] .ot-add-questions__loading-ring.ot-student-progress-ring {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-inline: auto;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow:
+    inset 0 3px 10px rgba(var(--color-brand-rgb), 0.1),
+    inset 0 1px 3px rgba(16, 19, 31, 0.07),
+    inset 0 -1px 2px rgba(255, 255, 255, 0.5);
+}
+[data-page="add-questions"] .ot-add-questions__loading-ring .ot-student-progress-ring__svg {
+  position: relative;
+  z-index: 1;
+  width: 200px;
+  height: 200px;
+  transform: translateZ(0);
+  animation: ot-aq-loading-ring-spin 1.8s linear infinite;
+}
+[data-page="add-questions"] .ot-add-questions__loading-ring .ot-student-progress-ring__fill {
+  stroke-width: calc(var(--icon-stroke-default) * 120 / 200);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+[data-page="add-questions"] .ot-add-questions__loading-ring-arc {
+  stroke-dasharray: 88 273;
+  animation: ot-aq-loading-ring-dash 1.35s ease-in-out infinite;
+}
+@keyframes ot-aq-loading-ring-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes ot-aq-loading-ring-dash {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dashoffset: -120;
+  }
+  100% {
+    stroke-dashoffset: -361;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-page="add-questions"] .ot-add-questions__loading-ring .ot-student-progress-ring__svg {
+    animation: none;
+  }
+  [data-page="add-questions"] .ot-add-questions__loading-ring-arc {
+    animation: none;
+    stroke-dasharray: 120 240;
+  }
+  [data-page="add-questions"] .ot-add-questions__loading-overlay--visible .ot-add-questions__loading-tip {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+[data-page="add-questions"] .ot-add-questions__materials-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: 0;
+}
+[data-page="add-questions"] .ot-add-questions__materials-block + .ot-add-questions__materials-block {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+[data-page="add-questions"] .ot-add-questions__materials-search {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+[data-page="add-questions"] .ot-add-questions__materials-intro {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--type-body-xs);
+  line-height: 20px;
+  letter-spacing: 0;
+  color: var(--color-ds-text-light);
+}
+[data-page="add-questions"] .ot-add-questions__search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  border-radius: 15px;
+  border: 1px solid var(--onetutor-card-border);
+  background: var(--color-bg-surface);
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: 0;
+  min-height: 44px;
+  box-sizing: border-box;
+}
+[data-page="add-questions"] .ot-add-questions__search--materials {
+  min-height: 40px;
+  height: 40px;
+  padding: var(--space-2) var(--space-3);
+  box-sizing: border-box;
+  border-color: var(--color-border-ds);
+  border-radius: 15px;
+}
+[data-page="add-questions"] .ot-add-questions__search--materials .ot-add-questions__search-input {
+  font-size: var(--type-body-xs);
+  line-height: 20px;
+  color: var(--color-ds-text-main);
+}
+[data-page="add-questions"] .ot-add-questions__search--materials .ot-add-questions__search-input::placeholder {
+  color: var(--color-ds-placeholder);
+}
+[data-page="add-questions"] .ot-add-questions__search-start {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex: 1;
+  min-width: 0;
+}
+[data-page="add-questions"] .ot-add-questions__search-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--slate-500);
+  flex-shrink: 0;
+}
+[data-page="add-questions"] .ot-add-questions__search--materials .ot-add-questions__search-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--color-ds-text-main);
+}
+[data-page="add-questions"] .ot-add-questions__search--materials .ot-add-questions__search-filter {
+  color: var(--color-ds-text-main);
+}
+[data-page="add-questions"] .ot-add-questions__search--materials .ot-add-questions__search-filter:hover {
+  color: var(--color-accent-primary);
+}
+[data-page="add-questions"] .ot-add-questions__search-input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-text-primary);
+  outline: none;
+  font-size: var(--type-body-sm);
+  line-height: var(--type-line-body);
+}
+[data-page="add-questions"] .ot-add-questions__search-input::placeholder {
+  color: var(--slate-500);
+}
+[data-page="add-questions"] .ot-add-questions__search-filter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--slate-500);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+[data-page="add-questions"] .ot-add-questions__search-filter:hover {
+  color: var(--color-accent-primary);
+}
+[data-page="add-questions"] .ot-add-questions__materials-block {
+  margin-bottom: 0;
+}
+[data-page="add-questions"] .ot-add-questions__materials-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+[data-page="add-questions"] .ot-add-questions__materials-head .ot-add-questions__label {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--type-body-md);
+  line-height: var(--type-line-display);
+  color: var(--color-ds-text-main);
+}
+[data-page="add-questions"] .ot-add-questions__materials-suggested-title {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--type-body-md);
+  line-height: var(--type-line-display);
+  color: var(--color-ds-text-main);
+}
+[data-page="add-questions"] .ot-add-questions__materials-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+[data-page="add-questions"] .ot-add-questions__deselect-all {
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  color: var(--color-ds-text-light);
+  font-family: var(--font-body);
+  font-size: var(--type-body-xs);
+  line-height: 20px;
+  text-decoration: none;
+}
+[data-page="add-questions"] .ot-add-questions__deselect-all:hover {
+  color: var(--color-ds-text-main);
+}
+[data-page="add-questions"] .ot-add-questions__link-btn {
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  color: var(--color-accent-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+[data-page="add-questions"] .ot-add-questions__link-btn:hover {
+  color: var(--hover-fg);
+}
+[data-page="add-questions"] .ot-add-questions__material-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4) var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--onetutor-card-border);
+  background: color-mix(in srgb, var(--color-bg-canvas) 35%, var(--color-bg-surface));
+  cursor: pointer;
+  transition:
+    border-color var(--motion-fast) var(--ease-standard),
+    box-shadow var(--motion-fast) var(--ease-standard);
+}
+/* Figma 2585:4185 — material row: white pill, 15px radius, DS border */
+[data-page="add-questions"] .ot-add-questions__half--materials .ot-add-questions__material-card {
+  padding: var(--space-2) var(--space-6) var(--space-2) var(--space-3);
+  border-radius: 15px;
+  border: 1px solid var(--color-border-ds);
+  background: var(--color-bg-surface);
+  box-shadow: none;
+}
+[data-page="add-questions"] .ot-add-questions__material-card:hover {
+  border-color: color-mix(in srgb, var(--color-accent-muted) 55%, var(--onetutor-card-border));
+  box-shadow: var(--shadow-sm);
+}
+[data-page="add-questions"] .ot-add-questions__half--materials .ot-add-questions__material-card:hover {
+  border-color: var(--color-border-ds);
+  box-shadow: none;
+}
+[data-page="add-questions"] .ot-add-questions__material-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+  flex: 1;
+}
+[data-page="add-questions"] .ot-add-questions__material-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--color-text-primary);
+  font-size: var(--type-body-sm);
+  line-height: var(--type-line-body);
+}
+[data-page="add-questions"] .ot-add-questions__half--materials .ot-add-questions__material-title {
+  font-family: var(--font-body);
+  font-size: var(--type-body-xs);
+  line-height: 20px;
+  color: var(--color-ds-text-main);
+}
+[data-page="add-questions"] .ot-add-questions__material-icon--image {
+  color: var(--color-data-easy);
+}
+[data-page="add-questions"] .ot-add-questions__material-icon--video {
+  color: var(--color-data-hard);
+}
+[data-page="add-questions"] .ot-add-questions__material-icon--text {
+  color: var(--pill-file-text);
+}
+[data-page="add-questions"] .ot-add-questions__material-icon--doc {
+  color: var(--pill-file-text);
+}
+[data-page="add-questions"] .ot-add-questions__material-card .ot-add-questions__checkbox {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  flex-shrink: 0;
+  border-radius: 2px;
+  border: 1px solid var(--onetutor-card-border);
+  background: var(--color-bg-surface);
+  cursor: pointer;
+  accent-color: transparent;
+}
+[data-page="add-questions"] .ot-add-questions__half--materials .ot-add-questions__material-card .ot-add-questions__checkbox {
+  border-color: var(--color-border-ds);
+}
+[data-page="add-questions"] .ot-add-questions__material-card .ot-add-questions__checkbox:checked {
+  background: var(--color-text-primary);
+  border-color: var(--color-text-primary);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+  background-size: 10px 10px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+[data-page="add-questions"] .ot-add-questions__half--materials .ot-add-questions__material-card .ot-add-questions__checkbox:checked {
+  background: var(--color-ds-text-main);
+  border-color: var(--color-ds-text-main);
+}
+[data-page="add-questions"] .ot-add-questions__material-card .ot-add-questions__checkbox:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--color-accent-primary) 45%, transparent);
+  outline-offset: 2px;
+}
+[data-page="add-questions"] .ot-add-questions__tip-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  border-radius: 6px;
+  border: 1px solid var(--onetutor-card-border);
+  padding: var(--space-4) var(--space-5);
+  margin-bottom: var(--space-6);
+}
+[data-page="add-questions"] .ot-add-questions__bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  align-items: stretch;
+}
+@media (max-width: 1024px) {
+  [data-page="add-questions"] .ot-add-questions__bottom {
+    grid-template-columns: 1fr;
+  }
+}
+[data-page="add-questions"] .ot-add-questions__panel {
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+  border: 1px solid var(--onetutor-card-border);
+  background: var(--color-bg-surface);
+  min-height: 24rem;
+  max-height: 32rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm, none);
+}
+[data-page="add-questions"] .ot-add-questions__panel-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  padding: var(--space-5) var(--space-6);
+  border-bottom: 1px solid var(--color-border-muted);
+}
+[data-page="add-questions"] .ot-add-questions__panel-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+[data-page="add-questions"] .ot-add-questions__btn-tertiary {
+  border: none;
+  background: transparent;
+  padding: var(--space-2) var(--space-3);
+  cursor: pointer;
+  color: var(--slate-500);
+  border-radius: var(--radius-sm);
+}
+[data-page="add-questions"] .ot-add-questions__btn-tertiary:hover {
+  color: var(--color-text-primary);
+}
+[data-page="add-questions"] .ot-add-questions__icon-sq {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--onetutor-card-border);
+  background: var(--color-bg-surface);
+  color: var(--slate-500);
+  cursor: pointer;
+}
+[data-page="add-questions"] .ot-add-questions__icon-sq:hover {
+  color: var(--color-accent-primary);
+  border-color: color-mix(in srgb, var(--color-accent-primary) 35%, var(--onetutor-card-border));
+}
+[data-page="add-questions"] .ot-add-questions__panel-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: var(--space-4) var(--space-6) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+[data-page="add-questions"] .ot-add-questions__review-card {
+  border-radius: 6px;
+  border: 1px solid var(--onetutor-card-border);
+  padding: var(--space-4);
+  background: color-mix(in srgb, var(--color-brand-subtle) 8%, var(--color-bg-surface));
+}
+[data-page="add-questions"] .ot-add-questions__review-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+[data-page="add-questions"] .ot-add-questions__review-icons {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+[data-page="add-questions"] .ot-add-questions__mc-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: var(--slate-500);
+}
+[data-page="add-questions"] .ot-add-questions__pill-approved {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid color-mix(in srgb, var(--onetutor-level-easy) 55%, var(--color-border-muted));
+  background: color-mix(in srgb, var(--onetutor-level-easy) 8%, var(--color-bg-surface));
+  color: var(--onetutor-level-easy);
+  font-weight: 500;
+}
+[data-page="add-questions"] .ot-add-questions__drag {
+  display: inline-flex;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: grab;
+}
+[data-page="add-questions"] .ot-add-questions__drag:active {
+  cursor: grabbing;
+}
+
+/* For review — Figma 2603:4221; In quiz — Figma 2603:4568 */
+[data-page="add-questions"] .ot-add-questions__panel--review,
+[data-page="add-questions"] .ot-add-questions__panel--inquiz {
+  background: color-mix(in srgb, var(--color-bg-surface) 94%, var(--color-bg-canvas));
+  min-height: 28rem;
+  max-height: 33rem;
+}
+[data-page="add-questions"] .ot-add-questions__panel--review .ot-add-questions__panel-head--review,
+[data-page="add-questions"] .ot-add-questions__panel--inquiz .ot-add-questions__panel-head--inquiz {
+  padding: var(--space-4) var(--space-6);
+  align-items: center;
+  border-bottom: 1px solid var(--color-border-muted);
+}
+[data-page="add-questions"] .ot-add-questions__review-expand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2);
+  border: none;
+  background: transparent;
+  color: var(--slate-500);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+[data-page="add-questions"] .ot-add-questions__review-expand:hover {
+  color: var(--color-accent-primary);
+}
+[data-page="add-questions"] .ot-add-questions__panel-main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+[data-page="add-questions"] .ot-add-questions__panel-scroll--review,
+[data-page="add-questions"] .ot-add-questions__panel-scroll--inquiz {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--space-2) var(--space-6) var(--space-6);
+  scrollbar-width: thin;
+  scrollbar-color: var(--onetutor-card-border) var(--color-bg-surface);
+}
+[data-page="add-questions"] .ot-add-questions__panel-scroll--review::-webkit-scrollbar,
+[data-page="add-questions"] .ot-add-questions__panel-scroll--inquiz::-webkit-scrollbar {
+  width: 8px;
+}
+[data-page="add-questions"] .ot-add-questions__panel-scroll--review::-webkit-scrollbar-track,
+[data-page="add-questions"] .ot-add-questions__panel-scroll--inquiz::-webkit-scrollbar-track {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--onetutor-card-border);
+  border-radius: var(--radius-pill);
+}
+[data-page="add-questions"] .ot-add-questions__panel-scroll--review::-webkit-scrollbar-thumb,
+[data-page="add-questions"] .ot-add-questions__panel-scroll--inquiz::-webkit-scrollbar-thumb {
+  background: var(--onetutor-card-border);
+  border-radius: var(--radius-pill);
+}
+[data-page="add-questions"] .ot-add-questions__review-qa {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-border-muted);
+}
+[data-page="add-questions"] .ot-add-questions__review-qa:last-child {
+  border-bottom: none;
+}
+[data-page="add-questions"] .ot-add-questions__review-qa-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  width: 100%;
+}
+[data-page="add-questions"] .ot-add-questions__review-qa-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+  flex: 1;
+}
+[data-page="add-questions"] .ot-add-questions__review-qa-title {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--type-body-sm);
+  line-height: var(--type-line-body);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+[data-page="add-questions"] .ot-add-questions__review-type-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 20px;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--onetutor-card-border);
+  background: var(--color-bg-surface);
+  color: var(--slate-500);
+  flex-shrink: 0;
+}
+[data-page="add-questions"] .ot-add-questions__review-qa-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+[data-page="add-questions"] .ot-add-questions__review-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  border: none;
+  background: transparent;
+  color: var(--slate-500);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+[data-page="add-questions"] .ot-add-questions__review-icon-btn:hover {
+  color: var(--color-accent-primary);
+}
+[data-page="add-questions"] .ot-add-questions__review-icon-btn--approve {
+  color: var(--onetutor-level-easy);
+}
+[data-page="add-questions"] .ot-add-questions__review-icon-btn--approve:hover {
+  color: color-mix(in srgb, var(--onetutor-level-easy) 88%, var(--color-text-primary));
+}
+[data-page="add-questions"] .ot-add-questions__review-qa-body {
+  color: var(--color-text-primary);
+  margin: 0;
+  width: 100%;
+}
+[data-page="add-questions"] .ot-add-questions__review-mc {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+}
+[data-page="add-questions"] .ot-add-questions__review-mc-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+[data-page="add-questions"] .ot-add-questions__review-mc-icon--correct {
+  color: var(--onetutor-level-easy);
+}
+[data-page="add-questions"] .ot-add-questions__review-mc-icon--wrong {
+  color: var(--color-text-primary);
+}
+[data-page="add-questions"] .ot-add-questions__review-mc-label {
+  color: var(--color-text-primary);
+}
+[data-page="add-questions"] .ot-add-questions__review-bullets {
+  margin: 0;
+  padding-left: 1.125rem;
+  list-style-type: disc;
+  color: var(--color-text-primary);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+[data-page="add-questions"] .ot-add-questions__review-bullets li {
+  padding-left: var(--space-1);
+}
+
+/* In quiz panel — Figma 2603:4568 */
+[data-page="add-questions"] .ot-add-questions__publish-btn {
+  min-width: 6.75rem;
+}
+[data-page="add-questions"] .ot-add-questions__inquiz-qa {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-border-muted);
+}
+[data-page="add-questions"] .ot-add-questions__inquiz-qa:last-child {
+  border-bottom: none;
+}
+[data-page="add-questions"] .ot-add-questions__inquiz-qa-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  width: 100%;
+}
+[data-page="add-questions"] .ot-add-questions__inquiz-qa-left {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+  flex: 1;
+}
+[data-page="add-questions"] .ot-add-questions__inquiz-pills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+[data-page="add-questions"] .ot-add-questions__inquiz-pill-approved {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 20px;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-accent-muted);
+  background: var(--color-bg-surface);
+  color: var(--color-accent-primary);
+  flex-shrink: 0;
+}
+[data-page="add-questions"] .ot-add-questions__inquiz-options {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-shrink: 0;
+}
+[data-page="add-questions"] .ot-add-questions__inquiz-more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  color: var(--slate-500);
+}
+[data-page="add-questions"] .ot-add-questions__inquiz-more:hover {
+  color: var(--color-accent-primary);
+}
+[data-page="add-questions"] .ot-add-questions__inquiz-body {
+  color: var(--color-text-primary);
+  margin: 0;
+  width: 100%;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Materials Library — Figma 2454:4707                                        */
+/* -------------------------------------------------------------------------- */
+[data-page="materials-library"] .ot-materials-upload {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  border-radius: 6px;
+  border: 1px solid var(--onetutor-card-border);
+  background-color: var(--color-bg-surface);
+  box-shadow: none;
+  padding: var(--space-6);
+}
+[data-page="materials-library"] .ot-materials-upload__consent {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+[data-page="materials-library"] .ot-materials-upload__consent-text {
+  margin: 0;
+  color: var(--color-text-primary);
+  max-width: 52rem;
+}
+[data-page="materials-library"] .ot-materials-upload__dropzone {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  min-height: 94px;
+  padding: var(--space-6) var(--space-4) var(--space-6) var(--space-6);
+  border-radius: 6px;
+  background: var(--color-bg-subtle);
+}
+[data-page="materials-library"] .ot-materials-upload__dropzone--active {
+  outline: 2px solid var(--color-accent-muted);
+  outline-offset: 0;
+}
+[data-page="materials-library"] .ot-materials-upload__drop-copy {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  opacity: 0.5;
+  color: var(--color-text-primary);
+  min-width: 0;
+}
+[data-page="materials-library"] .ot-materials-upload__drop-title {
+  margin: 0;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+[data-page="materials-library"] .ot-materials-upload__drop-hint {
+  margin: 0;
+  color: var(--color-text-primary);
+}
+[data-page="materials-library"] .ot-materials-library {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  border-radius: 6px;
+  border: 1px solid var(--onetutor-card-border);
+  background-color: var(--color-bg-surface);
+  box-shadow: none;
+  padding: var(--space-6);
+}
+[data-page="materials-library"] .ot-materials-library__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+}
+[data-page="materials-library"] .ot-materials-library__search {
+  flex: 1 1 280px;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 40px;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--onetutor-card-border);
+  border-radius: 15px;
+  background: var(--color-bg-surface);
+}
+[data-page="materials-library"] .ot-materials-library__search-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--slate-500);
+  stroke-width: var(--icon-stroke-default);
+}
+[data-page="materials-library"] .ot-materials-library__search-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: var(--type-body-xs);
+  line-height: var(--type-line-body);
+  color: var(--color-text-primary);
+  outline: none;
+}
+[data-page="materials-library"] .ot-materials-library__search-input::placeholder {
+  color: var(--slate-500);
+}
+[data-page="materials-library"] .ot-materials-library__search-filter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border: none;
+  background: transparent;
+  color: var(--slate-500);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: color var(--hover-fade-duration) var(--ease-hover-fade);
+}
+[data-page="materials-library"] .ot-materials-library__search-filter:hover {
+  color: var(--hover-fg);
+}
+[data-page="materials-library"] .ot-materials-library__search-filter:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+  color: var(--hover-fg);
+}
+[data-page="materials-library"] .ot-materials-library__toolbar-btn {
+  height: 40px;
+  flex-shrink: 0;
+}
+[data-page="materials-library"] .ot-materials-library__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(276px, 1fr));
+  gap: var(--space-2);
+  min-height: 120px;
+  width: 100%;
+}
+[data-page="materials-library"] .ot-materials-library__grid--list {
+  grid-template-columns: 1fr;
+}
+[data-page="materials-library"] .ot-materials-library__empty {
+  margin: 0;
+  color: var(--slate-500);
+  grid-column: 1 / -1;
+}
+[data-page="materials-library"] .ot-materials-library__card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 232px;
+  padding: var(--space-6);
+  border-radius: 6px;
+  border: 1px solid var(--color-border-default);
+  background: var(--color-bg-surface);
+  text-align: left;
+}
+[data-page="materials-library"] .ot-materials-library__card-top {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+[data-page="materials-library"] .ot-materials-library__file-type {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: 24px;
+}
+[data-page="materials-library"] .ot-materials-library__file-icon {
+  color: var(--color-text-secondary);
+}
+[data-page="materials-library"] .ot-materials-library__ext {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-pill);
+  border: 1px solid;
+  background: var(--color-bg-surface);
+  white-space: nowrap;
+}
+[data-page="materials-library"] .ot-materials-library__ext--txt {
+  border-color: #93c5fd;
+  color: #3b82f6;
+}
+[data-page="materials-library"] .ot-materials-library__ext--pdf {
+  border-color: #fda4af;
+  color: #f43f5e;
+}
+[data-page="materials-library"] .ot-materials-library__ext--vid {
+  border-color: #d8b4fe;
+  color: #a855f7;
+}
+[data-page="materials-library"] .ot-materials-library__ext--img {
+  border-color: #5eead4;
+  color: #14b8a6;
+}
+[data-page="materials-library"] .ot-materials-library__card-title {
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-height: 72px;
+}
+[data-page="materials-library"] .ot-materials-library__card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  width: 100%;
+}
+[data-page="materials-library"] .ot-materials-library__uploaded {
+  margin: 0;
+  color: var(--slate-500);
+}
+[data-page="materials-library"] .ot-materials-library__card-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+[data-page="materials-library"] .ot-materials-library__icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: color var(--hover-fade-duration) var(--ease-hover-fade);
+}
+[data-page="materials-library"] .ot-materials-library__icon-btn:hover {
+  color: var(--hover-fg);
+}
+[data-page="materials-library"] .ot-materials-library__icon-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+[data-page="materials-library"] .ot-materials-library__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  width: 100%;
+  padding-top: var(--space-2);
+}
+[data-page="materials-library"] .ot-materials-library__pagination-prev,
+[data-page="materials-library"] .ot-materials-library__pagination-next {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-body);
+  font-size: var(--type-body-sm);
+  line-height: var(--type-line-body);
+  color: var(--color-text-primary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+}
+[data-page="materials-library"] .ot-materials-library__pagination-next:hover {
+  color: var(--hover-fg);
+}
+[data-page="materials-library"] .ot-materials-library__pagination-next:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+[data-page="materials-library"] .ot-materials-library__pagination-prev--disabled {
+  color: var(--color-text-muted);
+  cursor: default;
+  pointer-events: none;
+}
+[data-page="materials-library"] .ot-materials-library__pagination-pages {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+[data-page="materials-library"] .ot-materials-library__pagination-page {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 var(--space-2);
+  border: none;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: var(--type-body-sm);
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+[data-page="materials-library"] .ot-materials-library__pagination-page:not(.ot-materials-library__pagination-page--active):hover {
+  background: var(--color-hover-overlay);
+}
+[data-page="materials-library"] .ot-materials-library__pagination-page:not(.ot-materials-library__pagination-page--active):focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+[data-page="materials-library"] .ot-materials-library__pagination-page--active {
+  background: var(--onetutor-button-default);
+  color: var(--color-text-on-primary);
+  cursor: default;
+}
+[data-page="materials-library"] .ot-materials-library__pagination-page--active:hover {
+  background: var(--onetutor-button-default);
+  color: var(--color-text-on-primary);
+}
+[data-page="materials-library"] .ot-materials-library__pagination-gap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  color: var(--slate-500);
+  font-size: var(--type-body-sm);
+}
+[data-page="materials-library"] .ot-breadcrumb a.ot-breadcrumb-back {
+  color: inherit;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Preview Quiz — Figma 2775:4004 / 2780:4324 / AI overlay 2775:4111          */
+/* -------------------------------------------------------------------------- */
+[data-page="preview-quiz"] {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--color-bg-canvas);
+}
+[data-page="preview-quiz"] .ot-preview-quiz {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background:
+    linear-gradient(180deg, rgba(238, 242, 255, 0.25) 0%, rgba(249, 251, 255, 0.25) 100%),
+    linear-gradient(180deg, rgba(129, 140, 248, 0.02) 0%, rgba(129, 140, 248, 0.02) 75%, rgba(254, 254, 254, 0.02) 100%),
+    var(--color-bg-canvas);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--color-bg-surface);
+  border-bottom: 1px solid var(--onetutor-card-border);
+  padding: var(--space-4) var(--space-8) var(--space-4);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: 36px;
+  margin-bottom: var(--space-4);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  min-width: 0;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__exit {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--slate-500);
+  text-decoration: none;
+  white-space: nowrap;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__exit:hover {
+  color: var(--hover-fg);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__divider {
+  width: 1px;
+  height: 16px;
+  background: var(--color-border-muted);
+  flex-shrink: 0;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__context {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+  min-width: 0;
+  flex-wrap: wrap;
+  color: var(--slate-500);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__quiz-name {
+  color: var(--color-text-secondary);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--slate-500);
+  cursor: pointer;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__icon-btn:hover {
+  color: var(--hover-fg);
+  background: var(--color-hover-overlay);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__icon-btn:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 2px;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__progress-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-2);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__progress-label {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+  color: var(--slate-500);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__progress-pct {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 18px;
+  color: var(--color-text-secondary);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__progress-track {
+  height: 8px;
+  width: 100%;
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  background: color-mix(in srgb, var(--color-brand-subtle) 40%, var(--color-bg-subtle));
+}
+[data-page="preview-quiz"] .ot-preview-quiz__progress-fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--color-text-primary);
+  transition: width var(--motion-base) var(--ease-standard);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__main {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  padding: var(--space-4) var(--space-8) calc(87px + var(--space-6));
+}
+[data-page="preview-quiz"] .ot-preview-quiz__stage {
+  width: 100%;
+  max-width: 840px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding-top: var(--space-4);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: 26px;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__meta-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+  min-width: 0;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__type {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--slate-500);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__type-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent-primary);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__insight {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--slate-500);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__insight svg {
+  color: var(--onetutor-level-easy);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__timer {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--slate-500);
+  flex-shrink: 0;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: 33px;
+  border-radius: 14px;
+  border: 1px solid var(--color-bg-surface);
+  background: color-mix(in srgb, var(--color-bg-surface) 75%, transparent);
+  box-shadow: 0 8px 32px 0 rgba(var(--color-brand-rgb), 0.08);
+  backdrop-filter: blur(8px);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__question {
+  margin: 0;
+  color: var(--color-text-primary);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__hint-panel {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-subtle);
+  border: 1px solid var(--color-border-default);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__hint-panel[hidden] {
+  display: none;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__hint-icon {
+  color: var(--color-accent-muted);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__hint-text {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--type-body-sm);
+  line-height: var(--type-line-body);
+  color: var(--color-text-primary);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__hint-source {
+  margin: 0;
+  color: var(--slate-500);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+  min-height: 68px;
+  padding: 2px 18px;
+  border-radius: 10px;
+  border: 2px solid var(--color-bg-subtle);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color var(--hover-fade-duration) var(--ease-hover-fade),
+    background-color var(--hover-fade-duration) var(--ease-hover-fade),
+    color var(--hover-fade-duration) var(--ease-hover-fade);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__option:hover {
+  border-color: var(--color-border-muted);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__option:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 2px;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__radio {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--color-border-strong);
+  flex-shrink: 0;
+  background: transparent;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__radio-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: transparent;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__option-label {
+  font-family: var(--font-display), "Suisse Intl Trial", Inter, sans-serif;
+  font-size: 16px;
+  font-weight: 450;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+}
+/* Selected — Figma 2775:4004 */
+[data-page="preview-quiz"] .ot-preview-quiz__option--selected {
+  border-width: 1px;
+  border-color: var(--color-accent-muted);
+  background: color-mix(in srgb, var(--color-accent-muted) 5%, transparent);
+  padding: 1px 17px;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__option--selected .ot-preview-quiz__radio {
+  border-color: var(--color-accent-primary);
+  background: var(--color-accent-primary);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__option--selected .ot-preview-quiz__radio-dot {
+  background: var(--color-bg-surface);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__option--selected .ot-preview-quiz__option-label {
+  color: var(--color-accent-primary);
+}
+/* Incorrect — Figma 2780:4324 */
+[data-page="preview-quiz"] .ot-preview-quiz__option--incorrect {
+  border-width: 1px;
+  border-color: #fda4af;
+  background: color-mix(in srgb, #fda4af 5%, transparent);
+  padding: 1px 17px;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__option--incorrect .ot-preview-quiz__radio {
+  border-color: #f43f5e;
+  background: #f43f5e;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__option--incorrect .ot-preview-quiz__radio-dot {
+  background: var(--color-bg-surface);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__option--incorrect .ot-preview-quiz__option-label {
+  color: #f43f5e;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__option--correct {
+  border-width: 1px;
+  border-color: color-mix(in srgb, var(--onetutor-level-easy) 55%, white);
+  background: color-mix(in srgb, var(--onetutor-level-easy) 8%, transparent);
+  padding: 1px 17px;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__option--correct .ot-preview-quiz__radio {
+  border-color: var(--onetutor-level-easy);
+  background: var(--onetutor-level-easy);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__option--correct .ot-preview-quiz__radio-dot {
+  background: var(--color-bg-surface);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__option--correct .ot-preview-quiz__option-label {
+  color: var(--onetutor-level-easy);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__need-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  align-self: flex-start;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: #6b7280;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__need-hint svg {
+  color: #eab308;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__need-hint:hover {
+  color: var(--hover-fg);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: 87px;
+  padding: 0 var(--space-8);
+  background: var(--color-bg-surface);
+  border-top: 1px solid var(--onetutor-card-border);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__prev {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--slate-500);
+  font-family: var(--font-body);
+  font-size: var(--type-body-sm);
+  cursor: pointer;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__prev:hover {
+  color: var(--hover-fg);
+  background: var(--color-hover-overlay);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__footer-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__tertiary {
+  height: 40px;
+  padding: var(--space-2) var(--space-3);
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--slate-500);
+  cursor: pointer;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__tertiary:hover {
+  color: var(--hover-fg);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__next {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  height: 40px;
+  padding: 8px 24px 8px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--color-accent-primary);
+  background: transparent;
+  color: var(--color-accent-primary);
+  cursor: pointer;
+  white-space: nowrap;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__next:hover {
+  background: color-mix(in srgb, var(--color-accent-primary) 6%, transparent);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__next:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 2px;
+}
+
+/* OneTutor AI floating overlay chip — Figma 2775:4111 */
+[data-page="preview-quiz"] .ot-preview-quiz__ai-fab {
+  position: fixed;
+  top: 210px;
+  right: max(24px, calc((100vw - 840px) / 2 - 40px));
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 56px;
+  padding: 15px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: color-mix(in srgb, var(--color-bg-surface) 88%, transparent);
+  box-shadow:
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.8),
+    var(--shadow-md);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: transform var(--motion-fast) var(--ease-standard), box-shadow var(--motion-fast) var(--ease-standard);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__ai-fab:hover,
+[data-page="preview-quiz"] .ot-preview-quiz__ai-fab--open {
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.8),
+    var(--shadow-lg);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__ai-fab:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 2px;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__ai-fab-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  flex-shrink: 0;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__ai-fab-icon img {
+  width: 20px;
+  height: 20px;
+  transform: rotate(45deg);
+  display: block;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__ai-fab-label {
+  margin: 0;
+  font-family: var(--font-display), "Suisse Intl Trial", Inter, sans-serif;
+  font-size: 16px;
+  font-weight: 450;
+  line-height: 1.2;
+  opacity: 0.75;
+  white-space: nowrap;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__ai-fab-one {
+  color: var(--color-accent-muted);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__ai-fab-tutor {
+  color: var(--color-accent-primary);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__ai-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 35;
+  background: color-mix(in srgb, var(--color-text-primary) 18%, transparent);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__ai-backdrop[hidden] {
+  display: none;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__ai-panel {
+  position: fixed;
+  top: 180px;
+  right: max(24px, calc((100vw - 840px) / 2 - 40px));
+  z-index: 45;
+  display: flex;
+  flex-direction: column;
+  width: min(360px, calc(100vw - 48px));
+  max-height: min(480px, calc(100vh - 220px));
+  border-radius: 16px;
+  border: 1px solid var(--onetutor-card-border);
+  background: var(--color-bg-surface);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__ai-panel[hidden] {
+  display: none;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__ai-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-3) var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-border-default);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__ai-panel-brand {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__ai-messages {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-height: 160px;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__ai-bubble {
+  max-width: 95%;
+  padding: var(--space-3) var(--space-4);
+  border-radius: 12px;
+  font-family: var(--font-body);
+  font-size: var(--type-body-sm);
+  line-height: var(--type-line-body);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__ai-bubble--assistant {
+  align-self: flex-start;
+  background: var(--color-bg-subtle);
+  color: var(--color-text-primary);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__ai-bubble--user {
+  align-self: flex-end;
+  background: color-mix(in srgb, var(--color-accent-primary) 12%, var(--color-bg-surface));
+  color: var(--color-text-primary);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__ai-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__ai-chip {
+  border: 1px solid var(--onetutor-card-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-bg-surface);
+  padding: 6px 12px;
+  font-family: var(--font-body);
+  font-size: var(--type-body-xs);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__ai-chip:hover {
+  border-color: var(--color-accent-muted);
+  color: var(--color-accent-primary);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__ai-form {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-top: 1px solid var(--color-border-default);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__ai-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 40px;
+  padding: 0 var(--space-3);
+  border-radius: 15px;
+  border: 1px solid var(--color-accent-muted);
+  background: var(--color-bg-surface);
+  font-family: var(--font-body);
+  font-size: var(--type-body-xs);
+  color: var(--color-text-primary);
+  outline: none;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__ai-input::placeholder {
+  color: var(--color-accent-muted);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__ai-input:focus-visible {
+  box-shadow: 0 0 0 3px var(--color-focus-ring);
+}
+[data-page="preview-quiz"] .ot-preview-quiz__ai-send {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--color-accent-primary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+[data-page="preview-quiz"] .ot-preview-quiz__ai-send:hover {
+  background: var(--color-hover-overlay);
+}
+@media (max-width: 900px) {
+  [data-page="preview-quiz"] .ot-preview-quiz__header,
+  [data-page="preview-quiz"] .ot-preview-quiz__footer,
+  [data-page="preview-quiz"] .ot-preview-quiz__main {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+  [data-page="preview-quiz"] .ot-preview-quiz__ai-fab,
+  [data-page="preview-quiz"] .ot-preview-quiz__ai-panel {
+    right: 16px;
+  }
+  [data-page="preview-quiz"] .ot-preview-quiz__ai-fab {
+    top: auto;
+    bottom: 104px;
+  }
+  [data-page="preview-quiz"] .ot-preview-quiz__ai-panel {
+    top: auto;
+    bottom: 168px;
+  }
+  [data-page="preview-quiz"] .ot-preview-quiz__course {
+    display: none;
+  }
+}

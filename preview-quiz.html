@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en" data-theme="cool">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Preview Quiz — OneTutor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              display: ["Suisse Intl Trial", "Inter", "system-ui", "sans-serif"],
+              body: ["Inter", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="design-system.css" />
+  </head>
+  <body data-page="preview-quiz">
+    <div class="ot-preview-quiz">
+      <header class="ot-preview-quiz__header">
+        <div class="ot-preview-quiz__header-top">
+          <div class="ot-preview-quiz__header-left">
+            <a href="manage-quizzes.html" class="ot-preview-quiz__exit ot-body-small">
+              <i data-lucide="chevron-left" class="h-4 w-4 ot-thin-arrow" aria-hidden="true"></i>
+              Exit
+            </a>
+            <span class="ot-preview-quiz__divider" aria-hidden="true"></span>
+            <p class="ot-preview-quiz__context ot-body-small">
+              <span class="ot-preview-quiz__course">Neuroplasticity 101: Building the Brain You Want</span>
+              <span aria-hidden="true">•</span>
+              <span class="ot-preview-quiz__quiz-name" id="preview-quiz-name">Understanding Cortisol Levels</span>
+            </p>
+          </div>
+          <div class="ot-preview-quiz__header-actions">
+            <button type="button" class="ot-preview-quiz__icon-btn" aria-label="Text size">
+              <i data-lucide="type" class="h-4 w-4 ot-thin-arrow"></i>
+            </button>
+            <button type="button" class="ot-preview-quiz__icon-btn" aria-label="Read aloud">
+              <i data-lucide="volume-2" class="h-4 w-4 ot-thin-arrow"></i>
+            </button>
+            <button type="button" class="ot-preview-quiz__icon-btn" aria-label="Theme">
+              <i data-lucide="palette" class="h-4 w-4 ot-thin-arrow"></i>
+            </button>
+          </div>
+        </div>
+        <div class="ot-preview-quiz__progress">
+          <div class="ot-preview-quiz__progress-meta">
+            <p class="ot-preview-quiz__progress-label" id="preview-progress-label">Question 3 of 15</p>
+            <p class="ot-preview-quiz__progress-pct" id="preview-progress-pct">20%</p>
+          </div>
+          <div class="ot-preview-quiz__progress-track" aria-hidden="true">
+            <div class="ot-preview-quiz__progress-fill" id="preview-progress-fill" style="width: 20%"></div>
+          </div>
+        </div>
+      </header>
+
+      <main class="ot-preview-quiz__main">
+        <div class="ot-preview-quiz__stage">
+          <div class="ot-preview-quiz__meta">
+            <div class="ot-preview-quiz__meta-left">
+              <span class="ot-preview-quiz__type">
+                <span class="ot-preview-quiz__type-dot" aria-hidden="true"></span>
+                <span id="preview-question-type">Multiple Choice</span>
+              </span>
+              <span class="ot-preview-quiz__insight">
+                <i data-lucide="trending-up" class="h-4 w-4" aria-hidden="true"></i>
+                57% more accuracy than last time
+              </span>
+            </div>
+            <div class="ot-preview-quiz__timer">
+              <i data-lucide="clock" class="h-4 w-4 ot-thin-arrow" aria-hidden="true"></i>
+              <span id="preview-timer">2:34</span>
+            </div>
+          </div>
+
+          <section class="ot-preview-quiz__card" aria-labelledby="preview-question-text">
+            <h1 class="ot-preview-quiz__question ot-h3" id="preview-question-text"></h1>
+
+            <aside id="preview-hint-panel" class="ot-preview-quiz__hint-panel" hidden>
+              <i data-lucide="quote" class="h-5 w-5 shrink-0 ot-preview-quiz__hint-icon" aria-hidden="true"></i>
+              <div>
+                <p class="ot-preview-quiz__hint-text" id="preview-hint-text"></p>
+                <p class="ot-body-tiny ot-preview-quiz__hint-source" id="preview-hint-source"></p>
+              </div>
+            </aside>
+
+            <div id="preview-options" class="ot-preview-quiz__options" role="radiogroup" aria-labelledby="preview-question-text"></div>
+          </section>
+
+          <button type="button" id="preview-hint-toggle" class="ot-preview-quiz__need-hint">
+            <i data-lucide="lightbulb" class="h-4 w-4" aria-hidden="true"></i>
+            Need a hint?
+          </button>
+        </div>
+      </main>
+
+      <footer class="ot-preview-quiz__footer">
+        <button type="button" id="preview-prev" class="ot-preview-quiz__prev">
+          <i data-lucide="chevron-left" class="h-5 w-5 ot-thin-arrow" aria-hidden="true"></i>
+          Previous
+        </button>
+        <div class="ot-preview-quiz__footer-actions">
+          <button type="button" id="preview-skip" class="ot-preview-quiz__tertiary ot-body-small">Skip Question</button>
+          <button type="button" id="preview-next" class="ot-preview-quiz__next ot-body-small">
+            Next Question
+            <i data-lucide="chevron-right" class="h-6 w-6 ot-thin-arrow" aria-hidden="true"></i>
+          </button>
+          <a href="manage-quizzes.html" class="ot-btn-secondary ot-body-small no-underline">Finish Quiz</a>
+        </div>
+      </footer>
+
+      <!-- OneTutor AI overlay (Figma 2775:4111) -->
+      <button
+        type="button"
+        id="preview-ai-fab"
+        class="ot-preview-quiz__ai-fab"
+        aria-expanded="false"
+        aria-controls="preview-ai-panel"
+      >
+        <span class="ot-preview-quiz__ai-fab-icon" aria-hidden="true">
+          <img src="assets/images/onetutor-ai-icon.svg" alt="" width="20" height="20" />
+        </span>
+        <span class="ot-preview-quiz__ai-fab-label">
+          <span class="ot-preview-quiz__ai-fab-one">One</span><span class="ot-preview-quiz__ai-fab-tutor">Tutor</span>
+        </span>
+      </button>
+
+      <div
+        id="preview-ai-panel"
+        class="ot-preview-quiz__ai-panel"
+        role="dialog"
+        aria-labelledby="preview-ai-title"
+        aria-hidden="true"
+        hidden
+      >
+        <div class="ot-preview-quiz__ai-panel-head">
+          <div class="ot-preview-quiz__ai-panel-brand">
+            <span class="ot-preview-quiz__ai-fab-icon" aria-hidden="true">
+              <img src="assets/images/onetutor-ai-icon.svg" alt="" width="20" height="20" />
+            </span>
+            <p id="preview-ai-title" class="ot-preview-quiz__ai-fab-label">
+              <span class="ot-preview-quiz__ai-fab-one">One</span><span class="ot-preview-quiz__ai-fab-tutor">Tutor</span>
+            </p>
+          </div>
+          <button type="button" id="preview-ai-close" class="ot-preview-quiz__icon-btn" aria-label="Close companion">
+            <i data-lucide="x" class="h-4 w-4 ot-thin-arrow"></i>
+          </button>
+        </div>
+        <div id="preview-ai-messages" class="ot-preview-quiz__ai-messages" aria-live="polite"></div>
+        <form id="preview-ai-form" class="ot-preview-quiz__ai-form">
+          <label class="sr-only" for="preview-ai-input">Ask OneTutor</label>
+          <input
+            id="preview-ai-input"
+            type="text"
+            class="ot-preview-quiz__ai-input"
+            placeholder="Ask for a hint or explanation…"
+            autocomplete="off"
+          />
+          <button type="submit" class="ot-preview-quiz__ai-send" aria-label="Send">
+            <i data-lucide="circle-arrow-up" class="h-5 w-5" aria-hidden="true"></i>
+          </button>
+        </form>
+      </div>
+      <div id="preview-ai-backdrop" class="ot-preview-quiz__ai-backdrop" hidden></div>
+    </div>
+
+    <script src="preview-quiz.js"></script>
+  </body>
+</html>
